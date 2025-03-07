@@ -1,5 +1,8 @@
 HELP.md
-# target/
+# 忽略 target 目錄中的所有文件
+target/
+# 但不忽略 target 目錄中的 narrative.jar 文件
+!target/narrative.jar
 !.mvn/wrapper/maven-wrapper.jar
 # !**/src/main/**/target/
 # !**/src/test/**/target/
