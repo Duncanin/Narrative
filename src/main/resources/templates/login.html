@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login 登入</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+</head>
+<body>
+    <div class="login">
+        <h2>用戶登入</h2>
+        <div th:if="${param.error}" style ="color:red;" class="alert alert-error">
+            用戶名稱或密碼錯誤，請重新輸入。
+        </div>
+        <form th:action="@{/user/login}" method="post">
+            <table>
+                <tr>
+                    <td>帳號 : </td>
+                    <td><input type="text" name="username" required></td>
+                </tr>
+                <tr>
+                    <td>密碼 : </td>
+                    <td><input type="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit">登入</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</html>
