@@ -1,0 +1,46 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd"> -->
+
+    <!-- 啟用 Spring MVC 註解支持 -->
+    <!-- <mvc:annotation-driven /> -->
+
+    <!-- 啟用註解掃描 -->
+    <!-- <context:component-scan base-package="com.example.controller"/>
+    <context:component-scan base-package="com.example.interceptor"/> -->
+
+    <!-- 攔截第一種方式 通過 bean 配置(全局攔截,全局配置)-->
+    <!-- 使用Spring 自動掃描功能，可以將攔截器定義為Bean，然後在配置文件中引用 -->
+    <!-- <mvc:interceptors>
+        <bean id="AuthInterceptor" class="com.example.interceptor.AuthInterceptor" />
+    </mvc:interceptors> -->
+
+    <!-- 配置攔截器 方法3-->
+    <!-- <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/regist"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/logout"/>
+            <mvc:exclude-mapping path="/error"/>
+            <mvc:exclude-mapping path="/css/**"/>
+            <mvc:exclude-mapping path="/js/**"/>
+            <mvc:exclude-mapping path="/images/**"/>
+            <mvc:exclude-mapping path="/fonts/**"/>
+            <mvc:exclude-mapping path="/vendor/**"/>
+            <mvc:exclude-mapping path="/favicon.ico"/> -->
+            <!-- 必須指定攔截器類別 -->
+            <!-- <bean class="com.example.interceptor.AuthInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans> -->

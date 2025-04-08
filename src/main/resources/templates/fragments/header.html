@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header Fragment</title>
+</head>
+<body>
+    <header th:fragment="pageHeader">
+        <h1>敘事 Narrative</h1>
+        <style>
+            nav {
+                background-color: #ef8800;
+                color: white;
+                text-align: center;
+                padding: 6px;
+                line-height: 3;
+                letter-spacing: 2px;
+                /*字距*/
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin: 0 5px;
+            }
+        </style>
+        <nav>
+            <a th:href="@{/}">首頁</a>
+            <a th:href="@{/studies}">讀書會資訊查詢</a>
+            <a th:href="@{/regist}">報名連結</a>
+        </nav>
+    </header>
+</body>
+</html>

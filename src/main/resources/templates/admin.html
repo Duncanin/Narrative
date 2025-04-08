@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>報名者列表</title>
+</head>
+<body>
+    <h2>所有報名者</h2>
+    <table border="1">
+        <tr>
+            <th>姓名</th>
+            <th>郵件</th>
+            <th>電話</th>
+            <th>學校/單位</th>
+            <th>報名時間</th>
+        </tr>
+        <tr th:each="record : ${registrations}">
+            <td th:text="${record.register_name}"></td>
+            <td th:text="${record.mail_address}"></td>
+            <td th:text="${record.phone_num}"></td>
+            <td th:text="${record.school_apart}"></td>
+            <td th:text="${record.regist_date}"></td>
+        </tr>
+    </table>
+</body>
+</html>

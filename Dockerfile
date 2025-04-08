@@ -20,5 +20,8 @@ WORKDIR /Narrative
 # 從構建階段複製生成的 JAR 文件到運行時映像
 COPY --from=build /app/target/narrative.jar /Narrative/narrative.jar
 
+# 暴露端口 8080
+# EXPOSE 8080
+
 # 設定容器啟動時執行的命令
 ENTRYPOINT ["java", "-jar", "/Narrative/narrative.jar"]

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.3</version>
+		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
@@ -44,9 +44,20 @@
 	</properties>
 
 	<dependencies>
+
+	<!-- Spring Boot JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -70,6 +81,15 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency> -->
+
+		<!-- <dependency>
 				<groupId>com.google.cloud</groupId>
 				<artifactId>google-cloud-run</artifactId>
 		</dependency>
@@ -82,10 +102,37 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
+		</dependency> -->
+
+		<!-- <dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-core</artifactId>
+			<version>2.9.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>2.0.12</version>
+		</dependency> -->
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.0</version>
+		</dependency>
+
 	</dependencies>
 
-		<dependencyManagement>
+		<!-- <dependencyManagement>
 			<dependencies>
 				<dependency>
 					<groupId>com.google.cloud</groupId>
@@ -95,7 +142,7 @@
 					<scope>import</scope>
 				</dependency>
 			</dependencies>
-		</dependencyManagement>
+		</dependencyManagement> -->
 
 	<build>
 		<finalName>narrative</finalName>
@@ -124,6 +171,25 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<!-- <plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<from>
+						<image>openjdk:17-jdk</image>
+					</from>
+
+					<from>
+						<image>gcr.io/narrative-453018/narrative</image>
+					</from>
+					<to>
+						<image>gcr.io/narrative-453018/narrative</image>
+					</to>
+				</configuration>
+			</plugin> -->
+
 		</plugins>
 	</build>
 

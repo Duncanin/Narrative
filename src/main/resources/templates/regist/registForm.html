@@ -1,0 +1,46 @@
+<!-- registForm.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <!-- 網站標題區 -->
+    <header class="site-header">
+        <h1><a th:href="@{/}">敘事 Narrative</a></h1>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </header>
+    <div class="container">
+        <div class="main-content">
+        <!-- <div th:replace="fragments/header :: pageHeader"></div> -->
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}" style="color:red"></p>
+        </div>
+        <h1>Welcome</h1>
+        <p>Please compelet the form ~ </p>
+
+        <h2>報名資料</h2>
+        <form th:action="@{/regist}" th:object="${registForm}" method="post" th:with="title='報名表單'">
+            <h2 th:text="${title}">表單</h2>
+            <div>
+                <label for="register_name"> 姓名 : </label>
+                <input type="text" id="register_name" name="register_name" th:field="*{name}" required> <br/>
+            </div>
+            <div>
+                <label for="mail_address"> 聯絡信箱 : </label>
+                <input type="text" id="mail_address" name="mail_address" th:field="*{Email}" required> <br/>
+            </div>
+            <div>
+                <label for="phone_number"> 聯絡電話 : </label>
+                <input type="text" id="phone_number" name="phone_number" th:field="*{phone}" required> <br/>
+            </div>
+            <div>
+                <label for="reserve_book"> 是否購書 : </label>
+                <input type="checkbox" id="reserve_book" name="reserve_book" th:field="*{reserveBook}"> <br/>
+            </div>
+            <button type="submit"> 報名 </button>
+        </form>
+        </div>
+        <!-- 側邊欄 -->
+        <div th:replace="fragments/sidebar :: sidebar"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+/* style.css */
+.header {
+    text-align: center; /* 確保 header 置中 */
+}
+body {
+    background: linear-gradient(to right, #fcc257, #ff9940);
+    /* 這裡使用了從橙色到淡橙色的漸層 */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    /* 字型是 Arial */
+    color: rgb(0, 0, 0);
+    /* 文字顏色為黑色 */
+    text-align: center;
+    /* 文字置中 */
+    font-size: px;
+    /* 文字大小 */
+    letter-spacing: 6px;
+    /* 文字間距 */
+    text-shadow: 2px 2px 4px #af9e9ef5;
+    /* 文字陰影 */
+    text-transform: uppercase;
+    /* 文字轉換為大寫 */
+    font-weight: bold;
+    /* 文字加粗 */
+    line-height: 3;
+    /* 行高 */
+    text-align: center;
+    /* 文字置中 */
+    margin-top: 2%;
+}
+
+table {
+    margin: 20px auto; /* 置中 */
+    width: 80%; /* 設定適當寬度 */
+    border-collapse: collapse; /* 讓邊框不重疊 */
+    letter-spacing: 1px;/* 文字間距 */
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd; /* 加邊框 */
+}
+
+/* 標題加上背景顏色 *
+/* th {
+    background-color: #f4f4f4;
+} */
+.container {
+    display: flex; /* 使用 Flexbox 來排版 */
+    justify-content: space-between; /* 左右排開 */
+    align-items: flex-start; /* 將內容置中 */
+    min-height: 500vh; /* 這裡是容器的最小高度 */
+    max-width: 1200px; /* 可視情況加限制寬 */
+    padding: 20px; /* 這裡是容器的內邊距 */
+    gap: 20px; /* 這裡是容器的間距 */
+    margin: 0 auto; /* 置中容器 */
+}
+.main-content {
+    gap: 20px; /* 這裡是容器的間距 */
+    flex: 3;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+/* display: flex;使用 Flexbox 來排版 0408 網頁格式會跑掉*/
+
+/* 這裡是內容區域的寬度 */
+.content-area {
+    flex: 1;
+}
+
+.sidebar {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 200px; /* 側邊欄的寬度 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #999;
+    text-align: left;
+}
+
+.site-header {
+    /* background-color: #fff5e1; */ /* 背景顏色 */
+    padding: 10px 0;  /* 上下內邊距 */
+    text-align: center;  /* 置中 */
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.1);  /* 輕微陰影 */
+    margin-bottom: 20px;  /* 下方間距 */
+}
+
+.site-header h1 {
+    margin: 0;  /* 去除預設的 margin */
+    font-size: 36px;  /* 標題字型大小 */
+    letter-spacing: 4px;  /* 字母間距 */
+}
+
+.site-header a {
+    text-decoration: none;  /* 去除底線 */
+    color: #0066cc;  /* 標題顏色 */
+    transition: color 0.3s;  /* 連結顏色變化過渡 */
+}
+
+.site-header a:hover {
+    color: #003972;  /* 滑鼠懸停時的顏色 */
+}
+
+.site-footer {
+    text-align: center; /* 置左 */
+    margin-top: 100px;
+    padding: 50px; /* 上下內邊距 */
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 14px; /* 字型大小 */
+    color: #333; /* 文字顏色 */
+}

@@ -1,5 +1,11 @@
 /Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Config/WebConfig.java
 /Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Controller/HomeController.java
+/Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Controller/RegisterController.java
 /Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Controller/UserController.java
+/Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Entity/RegistrationRecord.java
 /Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/NarrativeApplication.java
+/Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Repository/RegistrationRepository.java
+/Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Service/RegisterRowMapper.java
+/Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/Service/RegisterService.java
+/Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/dao/RegisterDao.java
 /Users/dkmac/Desktop/程式語言/javapractice/Narrative/src/main/java/com/example/narrative/interceptor/LoginInterceptor.java
