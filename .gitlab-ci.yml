@@ -2,7 +2,7 @@ stages:
   - build
   - test
   - deploy
-asy-hello:
+say-hello:
   stage: build
   script:
     - echo "Hello, World!"
