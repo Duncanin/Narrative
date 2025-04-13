@@ -9,38 +9,33 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     /* 字型是 Arial */
+
     color: rgb(0, 0, 0);
     /* 文字顏色為黑色 */
-    text-align: center;
+
+    /* text-align: center;  所有格式文字置中 0408移除 */
     /* 文字置中 */
+
     font-size: px;
     /* 文字大小 */
+
     letter-spacing: 6px;
     /* 文字間距 */
+
     text-shadow: 2px 2px 4px #af9e9ef5;
     /* 文字陰影 */
+
     text-transform: uppercase;
     /* 文字轉換為大寫 */
+    
     font-weight: bold;
     /* 文字加粗 */
+
     line-height: 3;
     /* 行高 */
-    text-align: center;
-    /* 文字置中 */
-    margin-top: 2%;
-}
 
-table {
-    margin: 20px auto; /* 置中 */
-    width: 80%; /* 設定適當寬度 */
-    border-collapse: collapse; /* 讓邊框不重疊 */
-    letter-spacing: 1px;/* 文字間距 */
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd; /* 加邊框 */
+    /* margin-top: 2%; */
+    /* 上方間距 */
 }
 
 /* 標題加上背景顏色 *
@@ -50,35 +45,43 @@ th, td {
 .container {
     display: flex; /* 使用 Flexbox 來排版 */
     justify-content: space-between; /* 左右排開 */
-    align-items: flex-start; /* 將內容置中 */
-    min-height: 500vh; /* 這裡是容器的最小高度 */
     max-width: 1200px; /* 可視情況加限制寬 */
     padding: 20px; /* 這裡是容器的內邊距 */
-    gap: 20px; /* 這裡是容器的間距 */
     margin: 0 auto; /* 置中容器 */
+
+    /* 0408與main-content重複 ，不要背景或 padding */
+    /* gap: 20px; 這裡是容器的間距 */
+    /* align-items: flex-start; 將內容置中 */
+    /* min-height: 500vh; 這裡是容器的最小高度 */
 }
 .main-content {
-    gap: 20px; /* 這裡是容器的間距 */
+    /* gap: 20px; 這裡是容器的間距 */
     flex: 3;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 2px 2px 8px #999;
+    text-align: left; /* 置左 */
 }
 /* display: flex;使用 Flexbox 來排版 0408 網頁格式會跑掉*/
 
-/* 這裡是內容區域的寬度 */
-.content-area {
-    flex: 1;
+.sidebar h1 {
+    font-size: 24px; /* 標題字型大小 */
+    margin-bottom: 10px; /* 下方間距 */
+    text-align: center; /* 置中 */
 }
 
-.sidebar {
+.sidebar ul{
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.6);
-    width: 200px; /* 側邊欄的寬度 */
-    padding: 20px;
+    /* width: 200px; 側邊欄的寬度 */
+    padding-left: 20px; /* 給一點左邊距看起來整齊 */
     border-radius: 10px;
-    box-shadow: 2px 2px 8px #999;
     text-align: left;
+}
+
+.sidebar ul li {
+    list-style: none; /* 去除預設的項目符號 */
+    margin-bottom: 10px; /* 下方間距 */
 }
 
 .site-header {
@@ -97,19 +100,33 @@ th, td {
 
 .site-header a {
     text-decoration: none;  /* 去除底線 */
-    color: #0066cc;  /* 標題顏色 */
+    color: #f5ffd0;  /* 標題顏色 */
     transition: color 0.3s;  /* 連結顏色變化過渡 */
 }
 
 .site-header a:hover {
-    color: #003972;  /* 滑鼠懸停時的顏色 */
+    color: #2100b3;  /* 滑鼠懸停時的顏色 */
 }
 
 .site-footer {
     text-align: center; /* 置左 */
-    margin-top: 100px;
+    margin-top: 1000px;
     padding: 50px; /* 上下內邊距 */
     background-color: rgba(255, 255, 255, 0.5);
     font-size: 14px; /* 字型大小 */
     color: #333; /* 文字顏色 */
+}
+
+table {
+    margin: 20px auto;
+    width: 80%;
+    border-collapse: collapse;
+    letter-spacing: 1px;
+}
+
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd; /* 加邊框 */
 }

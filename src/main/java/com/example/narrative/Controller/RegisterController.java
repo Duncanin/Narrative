@@ -1,3 +1,4 @@
+// RegisterController.java
 package com.example.narrative.Controller;
 
 import java.util.HashMap;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.narrative.Service.RegisterService;
 import com.example.narrative.model.RegistForm;
 import com.example.narrative.model.Register;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class RegisterController {
@@ -84,10 +87,16 @@ public class RegisterController {
         return ResponseEntity.of(Optional.ofNullable(register.get(0)));
     }
 
-    // 取得所有報名資料
+    // 取得所有報名資料 0411 modify from getAllRegisters to findAllList
     @GetMapping("/admin/register/list")
-    public ResponseEntity<List<Register>> getAllRegisters() {
-        return ResponseEntity.ok(registerService.getAllRegisters());
+    public ResponseEntity<List<Register>> findAllList() {
+        return ResponseEntity.ok(registerService.findAllList());
+    }
+
+    
+    @PostMapping("/admin/register")
+    public Register createRegister(@RequestBody Register register) {
+        return registerService.creaRegistRecord(register);
     }
 
     //沒有進入mysql

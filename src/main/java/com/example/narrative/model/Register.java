@@ -13,6 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "narrative_registration_system" ,
@@ -34,10 +37,23 @@ public class Register {
     private String phoneNum;
     @Column(name = "school_apart", nullable = false, length = 50)
     private String schoolApart;
+    @Column(name = "carmedium_have", nullable = false)
+    private Boolean carmediumHave;
+    @Column(name = "regist_a_session", nullable = false)
+    private String registASession;
+
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "regist_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  // 格式化日期
     private LocalDateTime registDate;
+    @Column(name ="reserve_book")
+    private String reserveBook;
 
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
+
+
+    
     // 無參數建構子 (JPA 需要)
     public Register() {}
 
@@ -57,11 +73,24 @@ public class Register {
     public String getSchoolApart() { return schoolApart; }
     public void setSchoolApart(String schoolApart) { this.schoolApart = schoolApart; }
 
+    public Boolean getCarmediumHave() { return carmediumHave; }
+    public void setCarmediumHave(Boolean carmediumHave) { this.carmediumHave = carmediumHave; }
+
     public LocalDateTime getRegistDate() { return registDate; }
     public void setRegistDate(LocalDateTime registDate) { this.registDate = registDate; }
 
+    public String getRegistASession() { return registASession; }
+    public void setRegistASession(String registASession) { this.registASession = registASession; }
+    
+    public String getReserveBook() { return reserveBook; }
+    public void setReserveBook(String reserveBook) { this.reserveBook = reserveBook; }
+    
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    
+
     public interface RegistRecordRepository extends JpaRepository<Register, Long> {
     
-        
+    
     }
 }

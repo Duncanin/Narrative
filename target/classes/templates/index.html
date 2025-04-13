@@ -5,9 +5,9 @@
         layout:decorate="~{fragments/layout}">
 <!-- 這裡的layout:decorate是用來指定這個頁面要使用的layout -->
 <!-- 這裡的th:replace是用來引入layout.html中的layout片段 -->
-<head>
+<!-- <head>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+</head> -->
 <body>
         <!-- <div>
             <div th:replace="fragments/header :: pageHeader">
@@ -24,7 +24,7 @@
         <h1>📚 敘事首頁</h1>
         <p>歡迎來到敘事讀書會</p>
         <a th:href="@{/regist}">👉 前往報名表單</a>
-        <a th:href="@{/study/list}">👉 前往讀書會列表</a>
+        <a th:href="@{/studies}">👉 前往讀書會列表</a>
 
         <p th:utext="${welcomeMessage}">預設歡迎訊息</p>
         <p th:utext="${systemNotice}">預設公告</p>

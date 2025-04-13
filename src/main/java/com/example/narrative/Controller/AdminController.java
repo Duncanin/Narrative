@@ -1,3 +1,5 @@
+// AdminController.java
+
 package com.example.narrative.Controller;
 
 import java.util.List;
@@ -17,22 +19,36 @@ import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/admin")
 @Controller
-public class UserController {
+public class AdminController {
     private static final String USERNAME = "admin" ;
     private static final String PASSWORD = "4321" ;
 
     private final RegisterService registerService;
 
-    public UserController (RegisterService registerService) {
+    public AdminController (RegisterService registerService) {
         this.registerService = registerService;
     }
 
-    @GetMapping("/dashboard")
-    public String userDashboard(Model model) {
-        List<Register> registers = registerService.getAllRegisters();
-        model.addAttribute("registers", registers);
+    @GetMapping("/registrations/page")
+    public String showRegistrationPage(Model model) {
+        List<Register> registers = registerService.findAllList();
+        model.addAttribute("registrations", registers); // 將報名資料添加到模型中
         return "admin";
     }
+
+    @GetMapping("registrations/page/edit")
+    public String editRegistrationPage(@RequestParam Integer registerId, Model model) {
+        Register register = registerService.getById(registerId);
+        model.addAttribute("registration", register); // 將報名資料添加到模型中
+        return "admin"; // 返回編輯頁面
+    }
+
+    // 尚未完成 Service
+    // @GetMapping("/registrations/page/delete")
+    // public String deleteRegistration(@RequestParam Integer registerId) {
+    //     registerService.deleteRegister(registerId);
+    //     return "redirect:/admin/registrations/page"; // 刪除後重定向到報名列表頁面
+    // }
 
 
     public String getMethodName(@RequestParam String param) {

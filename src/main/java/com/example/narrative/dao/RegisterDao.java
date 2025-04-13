@@ -1,10 +1,10 @@
 package com.example.narrative.dao;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import com.example.narrative.Service.RegisterRowMapper;
@@ -17,13 +17,15 @@ public class RegisterDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public void addRegister(Register register) throws SQLException {
-        String sql = "INSERT INFO narrative_registration_system " +
-        "(regist_name, mail_address, phone_num, school_apart) " +
-        "VALUE (?, ? ,? ,?)";
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    // public void addRegister(Register register) throws SQLException {
+    //     String sql = "INSERT INFO narrative_registration_system " +
+    //     "(regist_name, mail_address, phone_num, school_apart) " +
+    //     "VALUE (?, ? ,? ,?)";
     // try (Connection conn = DatabaseUtil.getConnection();
     // PreparedStatement pstmt = conn.prepareStatement(sql)) {
-    }
+    // }
 
     public Register getId (Integer registerId) {
         String sql ="SELECT id, register_name FROM narrative_registration_system WHERE id = :registerId";
@@ -41,6 +43,11 @@ public class RegisterDao {
         } else {
             return null;
         }
+    }
+
+    public List<Register> findAllList() {
+        String sql = "SELECT id, register_name FROM narrative_registration_system";
+        return jdbcTemplate.query(sql, new RegisterRowMapper());
     }
 
     public List<Register> findAll() {

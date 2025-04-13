@@ -45,7 +45,7 @@ public class RegisterService {
     }
 
     // 取得所有報名資料（管理員用）
-    public List<Register> getAllRegisters() {
+    public List<Register> findAllList() {
         return repository.findAll();
     }
 

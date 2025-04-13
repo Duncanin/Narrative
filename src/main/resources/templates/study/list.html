@@ -1,53 +1,52 @@
 <!-- list.html -->
 <!DOCTYPE html>
-<html lang="zh-tw" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="zh-tw" xmlns:th="http://www.thymeleaf.org"
+        xmlns=layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{fragments/layout}">
+<!-- <head>
     <meta charset="UTF-8">
     <title>敘事 Narrative</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+</head> -->
 <body>
     <!-- 網站標題區 -->
-    <header class="site-header">
+    <!-- <header class="site-header">
         <h1><a th:href="@{/}">敘事 Narrative</a></h1>
-    </header>
+    </header> -->
     <!-- 主內容區 -->
-    <div class="container">
-        <!-- <div th:replace="~{fragments/header :: pageHeader}"></div> -->
-        <div class ="main-content">
-            <table border="1">
-                <!-- 表格置網頁中間 -->
-                <tr>
-                    <th>讀書會名稱</th>
-                    <th>讀書會日期</th>
-                    <th>讀書會地點</th>
-                    <th>報名截止時間</th>
-                    <th>名額</th>
-                    <th>報名</th>
-                </tr>
-                <!-- 🔹 使用 th:each 迴圈顯示讀書會列表 (for迴圈)-->
-                <tr th:each="study : ${studies}">
-                    <td th:text="${study.name}"></td>
-                    <td th:text="${#temporals.format(study.date, 'yyyy-MM-dd')}"></td>
-                    <td th:text="${study.location}"></td>
-                    <td th:text="${#temporals.format(study.deadline, 'yyyy-MM-dd')}"></td>
-                    <td th:text="${study.quota}">30</td>
-                    <td>
-                        <a th:if="${study.isFull}"
-                            th:href="@{/regist}">
-                            報名
-                        </a>
-                        <span th:unless="${study.isFull}">名額已滿</span>
-                    </td>
-                </tr>
-            </table>
-            </div>
-            <!-- 側邊欄 -->
-            <div th:replace="fragments/sidebar :: sidebar"></div>
-        </div>
-        <!-- 🔹 若 `studies` 為空，顯示錯誤訊息 -->
-        <div th:if="${studies == null or #lists.isEmpty(studies)}">
-            <p>⚠ 沒有找到任何讀書會！</p>
+    <div layout:fragment="content">
+        <div class="container">
+            <!-- <div th:replace="~{fragments/header :: pageHeader}"></div> -->
+            <!-- <div class ="main-content"> -->
+                <table border="1">
+                    <!-- 表格置網頁中間 -->
+                    <tr>
+                        <th>讀書會名稱</th>
+                        <th>讀書會日期</th>
+                        <th>讀書會地點</th>
+                        <th>報名截止時間</th>
+                        <th>名額</th>
+                        <th>報名</th>
+                    </tr>
+                    <!-- 🔹 使用 th:each 迴圈顯示讀書會列表 (for迴圈)-->
+                    <tr th:each="study : ${studies}">
+                        <td th:text="${study.name}"></td>
+                        <td th:text="${#temporals.format(study.date, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${study.location}"></td>
+                        <td th:text="${#temporals.format(study.deadline, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${study.quota}">30</td>
+                        <td>
+                            <a th:if="${study.isFull}"
+                                th:href="@{/regist}">
+                                報名
+                            </a>
+                            <span th:unless="${study.isFull}">名額已滿</span>
+                        </td>
+                    </tr>
+                </table>
+                <!-- 側邊欄 -->
+                <!-- <div th:replace="fragments/sidebar :: sidebar"></div> -->
+            <!-- </div> -->
         </div>
     </div>
 </body>

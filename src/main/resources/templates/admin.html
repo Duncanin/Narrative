@@ -1,3 +1,4 @@
+<!-- admin.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,18 +8,33 @@
     <h2>所有報名者</h2>
     <table border="1">
         <tr>
+            <th>ID</th>
             <th>姓名</th>
             <th>郵件</th>
             <th>電話</th>
             <th>學校/單位</th>
+            <th>卡片自備與否</th>
+            <th>報名場次</th>
+            <th>預購書籍</th>
             <th>報名時間</th>
+            <th>報名狀態</th>
         </tr>
         <tr th:each="record : ${registrations}">
-            <td th:text="${record.register_name}"></td>
-            <td th:text="${record.mail_address}"></td>
-            <td th:text="${record.phone_num}"></td>
-            <td th:text="${record.school_apart}"></td>
-            <td th:text="${record.regist_date}"></td>
+            <td th:text="${record.id}"></td>
+            <td th:text="${record.registerName}"></td>
+            <td th:text="${record.mailAddress}"></td>
+            <td th:text="${record.phoneNum}"></td>
+            <td th:text="${record.schoolApart}"></td>
+            <td th:text="${record.carmediumHave}"></td>
+            <td th:text="${record.registASession}"></td>
+            <td th:text="${record.reserveBook}"></td>
+            <!-- <td th:text="${#dates.format(record.registDate, 'yyyy-MM-dd HH:mm:ss')}"></td> 0411 不可用，修正! -->
+            <td th:text="${#temporals.format(record.registDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <!-- <td th:text="${record.registStatus}"></td> 無此類別 -->
+            <td>
+                <a th:href="@{/admin/delete(id=${record.id})}">刪除</a>
+                <a th:href="@{/admin/edit(id=${record.id})}">編輯</a>
+            </td>
         </tr>
     </table>
 </body>

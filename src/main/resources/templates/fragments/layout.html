@@ -1,24 +1,27 @@
+<!-- layout.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       th:fragment="layout(content)">
-
+<head>
+    <meta charset="UTF-8">
+    <title> 敘事 Narrative</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
 <body>
-    <!-- 網站標題區 -->
+    <!-- 共用標題區 -->
     <header class="site-header">
         <h1><a th:href="@{/}">敘事 Narrative</a></h1>
     </header>
-    <!-- ⬇️ 加上 container -->
+    <!-- 共用版面：主內容 + 側邊欄 -->
     <div class="container">
-
-        <div class="main-content" layout:fragment="content">
-            <!-- 這裡會被 index.html 的 layout:fragment="content" 替換 -->
+        <!-- 這裡會被 index.html 的 layout:fragment="content" 替換 -->
         <!-- 主內容在左邊 -->
         <div class="main-content" layout:fragment="content">內容會被 layout 取代</div>
-        </div>
         <!-- 側邊欄在右邊 -->
         <div class="sidebar" th:replace="~{fragments/sidebar :: sidebar}"></div>
     </div>
+    <!-- 頁尾 -->
     <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
