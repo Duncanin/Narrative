@@ -63,22 +63,38 @@ public class AdminController {
 
     @PostMapping("/login")
     public String login (HttpServletRequest request, HttpSession session, Model model) {
-        String username = request.getParameter("username");
+        String adminname = request.getParameter("adminname");
         String password = request.getParameter("password");
 
-        if (USERNAME.equals(username) && PASSWORD.equals(password)) {
-            session.setAttribute("admin", username);
-            return "redirect:/admin"; // 登錄成功，重定向到首頁
+        if (USERNAME.equals(adminname) && PASSWORD.equals(password)) {
+            session.setAttribute("admin", adminname);
+            return "redirect:/admin/main"; // 登錄成功，重定向到首頁
         } else {
-            return "redirect:/user/login?error=true";
+            return "redirect:/admin/login?error=true";
         }
+    }
+
+//後台管管理
+    @GetMapping("/main")
+    public String adminMainPage() {
+        return "admin/main";
+    }
+
+    @GetMapping("/studies")
+    public String studiesPage() {
+        return "admin/studies";
+    }
+
+    @GetMapping("/others")
+    public String othersPage() {
+        return "admin/others";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         //清除session清除會話中的用戶信息
         session.invalidate();
-        return "redirect:/user/login";
+        return "redirect:/admin/login";
     }
     
 
