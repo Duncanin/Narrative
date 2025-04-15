@@ -17,4 +17,4 @@ test_job:
     - mvn test jacoco:report
   artifacts:
     paths:
-      - target/site/jacoco
+      - target/site/jacoco/
