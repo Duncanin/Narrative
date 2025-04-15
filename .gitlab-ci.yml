@@ -30,5 +30,4 @@ test_job:
     paths:
       - target/site/jacoco/
       - target/surefire-reports/
-
-coverage: '\d+\.\d+\%'
+      
