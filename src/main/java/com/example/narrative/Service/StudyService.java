@@ -48,9 +48,16 @@ public class StudyService {
     }
     public List<Studies> findAllWithRemainingQuota() {
         List<Studies> studies = studyRepository.findAll();
+        LocalDate currentDate = LocalDate.now();
         for (Studies study : studies) {
             int remainingQuota = study.getQuota() - study.getRegistrations().size();
             study.setRemainingQuota(remainingQuota);
+            study.setFull(remainingQuota <= 0); // <= 0 則為滿額
+            if (study.getDeadline() != null && currentDate.isAfter(study.getDeadline())) {
+                study.setExpired(true);
+            } else {
+                study.setExpired(false);
+            }
         }
         return studies;
     }

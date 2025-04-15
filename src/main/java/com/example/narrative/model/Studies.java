@@ -49,6 +49,9 @@ public class Studies {
     @Transient
     private Map<String, String> extraFields; // JSON 格式儲存欄位配置
 
+    @Transient
+    private boolean expired;
+
     public Studies() {
     }
 
@@ -67,5 +70,11 @@ public class Studies {
         List<Studies> findByIsFull(boolean isFull);
     }
 
+    public boolean isFull() {
+        return this.quota >0 && this.registrations != null && this.registrations.size() >= this.quota;
+    }
+    public boolean isExpired() {
+        return deadline != null && LocalDate.now().isAfter(deadline);
+    }
     
 }

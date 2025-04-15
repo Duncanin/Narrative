@@ -34,13 +34,13 @@
                         <td th:text="${#temporals.format(study.date, 'yyyy-MM-dd')}"></td>
                         <td th:text="${study.location}"></td>
                         <td th:text="${#temporals.format(study.deadline, 'yyyy-MM-dd')}"></td>
-                        <td th:text="${study.quota}">30</td>
+                        <td th:text="${study.quota}"></td>
                         <td>
-                            <a th:if="${study.isFull}"
-                                th:href="@{/regist}">
-                                報名
-                            </a>
-                            <span th:unless="${study.isFull}">名額已滿</span>
+                            <span th:if="${study.expired and study.full}">報名已截止 </br>名額已滿</span>
+                            <span th:if="${study.expired and !study.full}">報名已截止</span>
+                            <span th:if="${!study.expired and study.full}">名額已滿</span>
+                            <a th:if="${!study.expired and !study.full}"
+                                th:href="@{/regist(studyId=${study.id})}">報名</a>
                         </td>
                     </tr>
                 </table>

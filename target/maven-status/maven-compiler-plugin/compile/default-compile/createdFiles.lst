@@ -1,14 +1,10 @@
 com/example/narrative/model/Register.class
 com/example/narrative/Service/RegisterService.class
 com/example/narrative/Service/RegisterRowMapper.class
-com/example/narrative/dao/RegisterDao.class
 com/example/narrative/model/Register$RegistRecordRepository.class
-com/example/narrative/Repository/RegisterRepository.class
-com/example/narrative/Controller/UserController.class
 com/example/narrative/model/RegistForm.class
 com/example/narrative/NarrativeApplication.class
 com/example/narrative/NarrativeApplication$HelloController.class
-com/example/narrative/Controller/StudyControaller.class
 com/example/narrative/Repository/RegistrationRepository.class
 com/example/narrative/Controller/HomeController.class
 com/example/narrative/model/Studies.class

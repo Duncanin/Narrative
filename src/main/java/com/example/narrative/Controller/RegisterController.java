@@ -38,7 +38,7 @@ public class RegisterController {
     }
 
     model.addAttribute("registForm", registForm); // 表單物件
-    model.addAttribute("sessions", studyService.findAll()); // 所有讀書會場次放進下拉式選單
+    model.addAttribute("sessions", studyService.findAllWithRemainingQuota()); // 所有讀書會場次放進下拉式選單
 
     return "regist/registForm";
     }

@@ -27,9 +27,14 @@
                     <select name="registASession" th:field="*{registASession}" required>
                         <option value="" disabled selected>請選擇報名場次</option>
                         <option th:each="studySession : ${sessions}"
-                                th:value="${studySession.id}"
-                                th:text="${studySession.name +  ' - ' + #temporals.format(studySession.date, 'yyyy-MM-dd') + ' @ ' + studySession.location}">
-                            </option>
+                        th:value="${studySession.id}"
+                        th:disabled="${studySession.full or studySession.expired}"
+                        th:text="${studySession.name + ' - ' + #temporals.format(studySession.date, 'yyyy-MM-dd') 
+                                + ' @ ' + studySession.location
+                                + (studySession.expired and studySession.full ? '（已截止，名額已滿）'
+                                    : (studySession.expired ? '（已截止）'
+                                    : (studySession.full ? '（名額已滿）' : '')))}">
+                        </option>
                     </select>
                 </div>
                 <div>
