@@ -1,3 +1,4 @@
+// RegisterRepository.java
 package com.example.narrative.Repository;
 
 import java.util.List;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.narrative.model.Register;
 import java.time.LocalDateTime;
-
 
 @Repository
 public interface RegistrationRepository extends JpaRepository<Register, Long> {
@@ -31,6 +31,5 @@ public interface RegistrationRepository extends JpaRepository<Register, Long> {
     Optional<Register> findByRegisterName(String registerName); // 這行是用來查詢註冊者名稱的
     //讓 Spring Boot 會自動幫你產生 SELECT * FROM narrative_registration_system WHERE register_name = ? 的 SQL 查詢
 
-    
 
 }

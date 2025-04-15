@@ -1,25 +1,18 @@
-// RegisterController.java
+// RegisterController.java 報名表單管理
 package com.example.narrative.Controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.narrative.Service.RegisterService;
+import com.example.narrative.Service.StudyService;
 import com.example.narrative.model.RegistForm;
-import com.example.narrative.model.Register;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.narrative.model.Studies;
 
 
 @Controller
@@ -27,18 +20,27 @@ public class RegisterController {
 
     @Autowired
     private final RegisterService registerService;
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final StudyService studyService;
 
-    public RegisterController(RegisterService registerService) {
+    public RegisterController(RegisterService registerService, StudyService studyService) {
         this.registerService = registerService;
+        this.studyService = studyService;
     }
 
     //顯示報名表單
     @GetMapping ("/regist")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("registForm", new RegistForm());
-        return "regist/registForm"; // 對應 registForm.html
+    public String showRegistrationForm(@RequestParam(value = "studyId", required = false) Integer studyId, Model model) {
+        RegistForm registForm = new RegistForm();
+
+        if (studyId != null) {
+        Studies study = studyService.findById(studyId);
+        registForm.setRegistASession(study.getName()); // 預選場次名稱
+    }
+
+    model.addAttribute("registForm", registForm); // 表單物件
+    model.addAttribute("sessions", studyService.findAll()); // 所有讀書會場次放進下拉式選單
+
+    return "regist/registForm";
     }
 
     @PostMapping("/regist")
@@ -72,42 +74,11 @@ public class RegisterController {
         }
     }
 
-
-    // 提交報名
-    // @PostMapping("/submit")
-    // public ResponseEntity<String> registerUser(@RequestBody Register register) {
-    //     registerService.saveRegister(register);
-    //     return ResponseEntity.ok("報名成功！");
+    // 取得所有報名資料 0411 modify from getAllRegisters to findAllList
+    // 0414 worked repeat method, comment out
+    // @GetMapping("/admin/register/list")
+    // public ResponseEntity<List<Register>> findAllList() {
+    //     return ResponseEntity.ok(registerService.findAllList());
     // }
 
-        // 查詢報名者資料
-    @GetMapping("/search")
-    public ResponseEntity<Register> getUserByEmail(@RequestParam String email) {
-        List<Register> register = registerService.getRegisterByEmail(email);
-        return ResponseEntity.of(Optional.ofNullable(register.get(0)));
-    }
-
-    // 取得所有報名資料 0411 modify from getAllRegisters to findAllList
-    @GetMapping("/admin/register/list")
-    public ResponseEntity<List<Register>> findAllList() {
-        return ResponseEntity.ok(registerService.findAllList());
-    }
-
-    
-    @PostMapping("/admin/register")
-    public Register createRegister(@RequestBody Register register) {
-        return registerService.creaRegistRecord(register);
-    }
-
-    //沒有進入mysql
-    @RequestMapping("/registers")
-    public String insert() {
-        String sql = "INSERT INTO narrative_registration_system(Id,register_name) VALUES (3,'Duncan')";
-        Map<String, Object> map = new HashMap<>();
-        namedParameterJdbcTemplate.update(sql, map);
-        return "執行 INSERT sql";
-    }
-
-
-    
 }

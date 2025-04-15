@@ -3,16 +3,12 @@ package com.example.narrative.Service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.narrative.dao.RegisterDao;
 import com.example.narrative.model.Register;
 import com.example.narrative.Repository.RegistrationRepository;
 
 @Service
 public class RegisterService {
 
-    // private final RegistrationRepository Repository;
-    @Autowired
-    private final RegisterDao resgisterDao;
     @Autowired
     private RegistrationRepository repository;
 
@@ -23,25 +19,25 @@ public class RegisterService {
         register.setMailAddress(mailAddress);
         register.setPhoneNum(phoneNumber);
         register.setMailAddress(address);
-        resgisterDao.save(register);
+        repository.save(register);
     }
 
-    public RegisterService(RegisterDao resgisterDao) {
-        this.resgisterDao = resgisterDao;
+    public RegisterService(RegistrationRepository repository) {
+        this.repository = repository;
     }
 
-    public Register getId(Integer registerId) {
-        return resgisterDao.getId(registerId);
-    }
+    // public Register getId(Integer registerId) {
+    //     return repository.getId(registerId);
+    // }
 
     // 存儲報名資料
     public Register saveRegister(Register register) {
-        return resgisterDao.save(register);
+        return repository.save(register);
     }
 
     // 透過 email 查詢報名者
     public List<Register> getRegisterByEmail(String email) {
-        return resgisterDao.findByMailAddress(email);
+        return repository.findByMailAddress(email);
     }
 
     // 取得所有報名資料（管理員用）

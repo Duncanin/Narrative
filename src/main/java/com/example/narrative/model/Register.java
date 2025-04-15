@@ -1,3 +1,4 @@
+// File: Register.java
 package com.example.narrative.model;
 
 import java.time.LocalDateTime;
@@ -26,8 +27,8 @@ public class Register {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "study_id")
-    private Studies study;
+    @JoinColumn(name = "studies_id")
+    private Studies studies;
 
     @Column(name = "register_name", nullable = false, length = 50)
     private String registerName;
@@ -52,7 +53,8 @@ public class Register {
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-
+    @Column(name ="extra_fields", columnDefinition = "TEXT")
+    private String extraFields; //JASON 格式儲存欄位配置
     
     // 無參數建構子 (JPA 需要)
     public Register() {}

@@ -1,0 +1,47 @@
+<!-- admin/study/list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>讀書會列表</title>
+</head>
+<body>
+    <!-- 上方導覽列 -->
+    <nav>
+        <ul style="list-style: none; display: flex; justify-content: center; gap: 20px;">
+            <li><a th:href="@{/admin/main}">🏠 首頁管理</a></li>
+            <li><a th:href="@{/admin/studies/page}">📘 讀書會列表</a></li>
+            <li><a th:href="@{/admin/registrations/page}">📚 報名管理</a></li>
+            <li><a th:href="@{/admin/other}">🛠 其他</a></li>
+        </ul>
+    </nav>
+    <h2>讀書會列表</h2>
+    <table border="1" style="width: 90%; margin: 0 auto; text-align: center;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>讀書會名稱</th>
+                <th>讀書會時間</th>
+                <th>讀書會地點</th>
+                <th>報名截止時間</th>
+                <th>名額</th>
+                <th>剩餘名額</th>
+                <th>連結</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="study : ${studieslist}">
+                <td th:text="${study.id}"></td>
+                <td th:text="${study.name}"></td>
+                <td th:text="${#temporals.format(study.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${study.location}"></td>
+                <td th:text="${#temporals.format(study.deadline, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${study.quota}"></td>
+                <td th:text="${study.remainingQuota}"></td>
+                <td>
+                    <a th:href="@{/admin/study/edit(id=${study.id})}">讀書會詳情</a><br>
+                    <a th:href="@{/admin/study/registration(id=${study.id})}">報名者列表</a>
+            </tr>
+        </tbody>
+    </table>
+</body>

@@ -23,6 +23,16 @@
             <form th:action="@{/regist}" th:object="${registForm}" method="post" th:with="title='報名表單'">
                 <h2 th:text="${title}">表單</h2>
                 <div>
+                    <label> 報名場次 : </label>
+                    <select name="registASession" th:field="*{registASession}" required>
+                        <option value="" disabled selected>請選擇報名場次</option>
+                        <option th:each="studySession : ${sessions}"
+                                th:value="${studySession.id}"
+                                th:text="${studySession.name +  ' - ' + #temporals.format(studySession.date, 'yyyy-MM-dd') + ' @ ' + studySession.location}">
+                            </option>
+                    </select>
+                </div>
+                <div>
                     <label for="register_name"> 姓名 : </label>
                     <input type="text" id="register_name" name="register_name" th:field="*{name}" required> <br/>
                 </div>

@@ -8,4 +8,5 @@ public class RegistForm {
     private String email;
     private String phone;
     private Boolean reserveBook;
+    private String registASession;
 }

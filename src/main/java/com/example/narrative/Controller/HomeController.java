@@ -1,4 +1,4 @@
-// HomeController.java
+// HomeController.java 管理首頁
 package com.example.narrative.Controller;
 
 import org.springframework.stereotype.Controller;

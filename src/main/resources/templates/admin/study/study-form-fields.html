@@ -1,0 +1,33 @@
+<!-- templates/admin/stydy/study-form-fields.html -->
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>編輯報名表單欄位</title>
+</head>
+<body>
+    <h1>編輯報名表單欄位</h1>
+
+    <form th:action="@{/admin/study/form-fields}" method="post">
+        <label for="studyId">選擇讀書會場次：</label>
+        <select name="studyId" id="studyId" required>
+            <option th:each="study : ${studies}"
+                    th:value="${study.id}"
+                    th:text="${study.name}">
+            </option>
+        </select>
+
+        <h2>可自訂欄位</h2>
+        <div th:each="field, iStat : ${availableFields}">
+            <input type="checkbox"
+                   th:id="'field-' + ${iStat.index}"
+                   name="fieldKeys"
+                   th:value="${field.key}"
+                   th:checked="${selectedFieldKeys.contains(field.key)}" />
+            <label th:for="'field-' + ${iStat.index}" th:text="${field.label}"></label><br>
+        </div>
+
+        <button type="submit">儲存設定</button>
+    </form>
+</body>
+</html>

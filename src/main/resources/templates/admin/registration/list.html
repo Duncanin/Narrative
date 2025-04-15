@@ -5,19 +5,28 @@
     <title>報名者列表</title>
 </head>
 <body>
-    <h2>所有報名者</h2>
+    <!-- 上方導覽列 -->
+    <nav>
+        <ul style="list-style: none; display: flex; justify-content: center; gap: 20px;">
+            <li><a th:href="@{/admin/main}">🏠 首頁管理</a></li>
+            <li><a th:href="@{/admin/studies/page}">📘 讀書會列表</a></li>
+            <li><a th:href="@{/admin/registrations/page}">📚 報名者資訊</a></li>
+            <li><a th:href="@{/admin/other}">🛠 其他</a></li>
+        </ul>
+    </nav>
+    <h2>報名者聯絡資訊</h2>
     <table border="1">
         <tr>
             <th>ID</th>
             <th>姓名</th>
-            <th>郵件</th>
+            <th>電子郵件</th>
             <th>電話</th>
             <th>學校/單位</th>
             <th>卡片自備與否</th>
             <th>報名場次</th>
             <th>預購書籍</th>
             <th>報名時間</th>
-            <th>報名狀態</th>
+            <th>編輯</th>
         </tr>
         <tr th:each="record : ${registrations}">
             <td th:text="${record.id}"></td>
@@ -32,8 +41,7 @@
             <td th:text="${#temporals.format(record.registDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <!-- <td th:text="${record.registStatus}"></td> 無此類別 -->
             <td>
-                <a th:href="@{/admin/delete(id=${record.id})}">刪除</a>
-                <a th:href="@{/admin/edit(id=${record.id})}">編輯</a>
+                <a th:href="@{/admin/detail(id=${record.id})}">詳情</a><br
             </td>
         </tr>
     </table>
