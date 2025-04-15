@@ -1,4 +1,15 @@
 image: maven:3.8.6-eclipse-temurin-17
+
+services:
+  - name: mysql:5.7
+    alias: db
+
+variables:
+  MYSQL_DATABASE: root
+  MYSQL_ROOT_PASSWORD: P@M1dobken
+  MYSQL_USER: root
+  MYSQL_PASSWORD: P@M1dobken
+
 stages:
   - build
   - test
@@ -19,3 +30,5 @@ test_job:
     paths:
       - target/site/jacoco/
       - target/surefire-reports/
+
+coverage: '\d+\.\d+\%'
