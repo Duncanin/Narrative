@@ -1,4 +1,4 @@
-image: maven:3.8.6-eclipse-temurin-17-jdk
+image: maven:3.8.6-eclipse-temurin-17
 stages:
   - build
   - test
@@ -6,10 +6,10 @@ stages:
 say-hello:
   stage: build
   script:
-    - mvn clean package -DskipTests -batch -mode -U
+    - mvn clean package -DskipTests -batch-mode -U
   artifacts:
     paths:
-      - target/*jar
+      - target/*.jar
   
 test-job:
   stage: test
@@ -17,4 +17,4 @@ test-job:
     - mvn test jacoco:report
   artifacts:
     paths:
-      - target/jacoco.exec
+      - target/site/jacoco
