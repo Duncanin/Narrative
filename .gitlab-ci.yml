@@ -11,7 +11,7 @@ say-hello:
     paths:
       - target/*.jar
   
-test-job:
+test_job:
   stage: test
   script:
     - mvn test jacoco:report
