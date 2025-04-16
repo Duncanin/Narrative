@@ -6,15 +6,7 @@
 </head>
 <body>
     <!-- 上方導覽列 -->
-    <nav>
-        <ul style="list-style: none; display: flex; justify-content: center; gap: 20px;">
-            <li><a th:href="@{/admin/main}">🏠 首頁管理</a></li>
-            <li><a th:href="@{/admin/studies/page}">📘 讀書會列表</a></li>
-            <li><a th:href="@{/admin/registrations/page}">📚 報名者資訊</a></li>
-            <li><a th:href="@{/admin/other}">🛠 其他</a></li>
-            <li><a th:href="@{/admin/logout}">🚪 登出</a></li>
-        </ul>
-    </nav>
+    <div th:replace="~{fragments/nav :: adminNav(true)}"></div>
 
     <!-- 主內容區 -->
     <div>

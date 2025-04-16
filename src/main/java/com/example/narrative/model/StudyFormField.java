@@ -12,7 +12,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "study_form_fields", catalog = "narrative_management") // 資料表名稱
+@Table(name = "study_form_fields", // 資料表名稱
+        catalog = "narrative_management") // 資料庫名稱
 public class StudyFormField {
 
     @Id

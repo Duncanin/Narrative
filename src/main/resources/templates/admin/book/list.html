@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>書籍列表</title>
+</html>
+<body>
+    <!-- 上方導覽列 -->
+    <div th:replace="~{fragments/nav :: adminNav(false)}"></div>
+    <h2>書籍列表</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>書籍名稱</th>
+            <th>作者</th>
+            <th>出版商</th>
+            <th>價格</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.publisher}"></td>
+            <td th:text="${book.price}"></td>
+            <td>
+                <a th:href="@{/admin/book/edit(id=${book.id})}">編輯</a><br />
+                <a th:href="@{/admin/book/delete(id=${book.id})}" onclick="return confirm('確定要刪除這本書籍嗎？');">刪除</a><br />
+            </td>
+        </tr>
+</body>

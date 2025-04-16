@@ -15,6 +15,7 @@ public class RegisterService {
 
     public void saveRegistRecord(String registerName, String mailAddress, String phoneNumber, String address) {
         Register register = new Register();
+        register.setId(0); // 設定 ID 為 0，讓 JPA 自動生成
         register.setRegisterName(registerName);
         register.setMailAddress(mailAddress);
         register.setPhoneNum(phoneNumber);
@@ -51,5 +52,9 @@ public class RegisterService {
 
     public Register getById(Integer registerId) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public List<Register> findByStudyId(Integer studyId) {
+        return repository.findByStudies_Id(studyId);
     }
 }

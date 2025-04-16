@@ -24,7 +24,7 @@ public class StudyController {
     @GetMapping("/studies")
     public String listStudies(Model model) {
         List<Studies> studies = studyService.findAll(); //從資料庫取得讀書會資料
-        model.addAttribute("studies",studies); // 將讀書會資料添加到模型中
+        model.addAttribute("studies",studyService.findAllWithRemainingQuota()); // 將讀書會資料添加到模型中
         return "study/list"; // 對應 `templates/study/list.html`
     }
 

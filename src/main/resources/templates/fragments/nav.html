@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org"></html>
+
+<nav th:fragment="adminNav(isHome)">
+    <ul style="list-style: none; display: flex; justify-content: center; gap: 20px;">
+        <li><a th:href="@{/admin/main}">🏠 首頁管理</a></li>
+        <li><a th:href="@{/admin/studies/page}">📘 讀書會列表</a></li>
+        <li><a th:href="@{/admin/registrations/page}">📝 報名者資料管理</a></li>
+        <li><a th:href="@{/admin/books/list}">📚 書籍管理</a></li>
+        <li><a th:href="@{/admin/cardMediums/list}">💳 卡片媒材管理</a></li>
+        <li><a th:href="@{/admin/other}">🛠 其他</a></li>
+        <li th:if="${isHome}" ><a th:href="@{/admin/logout}">🚪 登出</a></li>
+    </ul>
+</nav>

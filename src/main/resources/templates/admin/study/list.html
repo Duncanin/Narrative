@@ -7,14 +7,8 @@
 </head>
 <body>
     <!-- 上方導覽列 -->
-    <nav>
-        <ul style="list-style: none; display: flex; justify-content: center; gap: 20px;">
-            <li><a th:href="@{/admin/main}">🏠 首頁管理</a></li>
-            <li><a th:href="@{/admin/studies/page}">📘 讀書會列表</a></li>
-            <li><a th:href="@{/admin/registrations/page}">📚 報名管理</a></li>
-            <li><a th:href="@{/admin/other}">🛠 其他</a></li>
-        </ul>
-    </nav>
+    <div th:replace="fragments/nav :: adminNav(false)"></div>
+    
     <h2>讀書會列表</h2>
     <table border="1" style="width: 90%; margin: 0 auto; text-align: center;">
         <thead>
@@ -40,7 +34,7 @@
                 <td th:text="${study.remainingQuota}"></td>
                 <td>
                     <a th:href="@{/admin/study/edit(id=${study.id})}">讀書會詳情</a><br>
-                    <a th:href="@{/admin/study/registration(id=${study.id})}">報名者列表</a>
+                    <a th:href="@{/admin/studies/register/{id}(id=${study.id})}">報名者列表</a>
             </tr>
         </tbody>
     </table>

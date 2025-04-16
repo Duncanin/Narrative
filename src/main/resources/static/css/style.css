@@ -82,6 +82,7 @@ body {
 .sidebar ul li {
     list-style: none; /* 去除預設的項目符號 */
     margin-bottom: 10px; /* 下方間距 */
+
 }
 
 .site-header {
@@ -117,16 +118,18 @@ body {
     color: #333; /* 文字顏色 */
 }
 
+/* no function */
 table {
-    margin: 20px auto;
-    width: 80%;
+    margin: 10px auto;
+    width: 90%;
     border-collapse: collapse;
     letter-spacing: 1px;
+    table-layout: fixed;
 }
 
-
+/* no function */
 th, td {
     padding: 10px;
     text-align: center;
-    border: 1px solid #ddd; /* 加邊框 */
+    border: 1px solid #000000;
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.example.narrative.Service.RegisterService;
 import com.example.narrative.model.Register;
 
@@ -22,18 +21,11 @@ public class AdminRegisterController {
         this.registerService = registerService;
     }
 
-    @GetMapping("/page")
+    @GetMapping("/page") //所有報名者資料
     public String showRegistrationPage(Model model) {
         List<Register> registers = registerService.findAllList();
-        model.addAttribute("registrations", registers); // 將報名資料添加到模型中
+        model.addAttribute("registrations", registers);
         return "admin/registration/list";
     }
 
-    @GetMapping("/page/edit")
-    public String editRegistrationPage(@RequestParam Integer registerId, Model model) {
-        Register register = registerService.getById(registerId);
-        model.addAttribute("registrations", register); // 將報名資料添加到模型中
-        return "admin/registration/edit"; // 返回編輯頁面
-    }
-    
 }

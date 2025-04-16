@@ -16,19 +16,28 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.Data;
 
-
+@Data
 @Entity
-@Table(name = "narrative_registration_system" ,
-        catalog = "narrative_management")  // 資料表名稱
+@Table(name = "narrative_registration_system" , // 資料表名稱
+        catalog = "narrative_management")  // 資料庫名稱
 public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @ManyToOne
+    @ManyToOne // 報名者可以報名多個讀書會
     @JoinColumn(name = "studies_id")
     private Studies studies;
+
+    @ManyToOne // 報名者可以選購多本書籍
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    @ManyToOne // 報名者可以選擇多種卡片
+    @JoinColumn(name = "card_medium_id")
+    private CardMedium carMedium;
 
     @Column(name = "register_name", nullable = false, length = 50)
     private String registerName;
@@ -38,17 +47,13 @@ public class Register {
     private String phoneNum;
     @Column(name = "school_apart", nullable = false, length = 50)
     private String schoolApart;
-    @Column(name = "carmedium_have", nullable = false)
-    private Boolean carmediumHave;
-    @Column(name = "regist_a_session", nullable = false)
-    private String registASession;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "regist_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  // 格式化日期
     private LocalDateTime registDate;
     @Column(name ="reserve_book")
-    private String reserveBook;
+    private Boolean reserveBook;
 
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
@@ -59,39 +64,9 @@ public class Register {
     // 無參數建構子 (JPA 需要)
     public Register() {}
 
-    // Getter 和 Setter
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getRegisterName() { return registerName; }
-    public void setRegisterName(String registerName) { this.registerName = registerName; }
-
-    public String getMailAddress() { return mailAddress; }
-    public void setMailAddress(String mailAddress) { this.mailAddress = mailAddress; }
-
-    public String getPhoneNum() { return phoneNum; }
-    public void setPhoneNum(String phoneNum) { this.phoneNum = phoneNum; }
-
-    public String getSchoolApart() { return schoolApart; }
-    public void setSchoolApart(String schoolApart) { this.schoolApart = schoolApart; }
-
-    public Boolean getCarmediumHave() { return carmediumHave; }
-    public void setCarmediumHave(Boolean carmediumHave) { this.carmediumHave = carmediumHave; }
-
-    public LocalDateTime getRegistDate() { return registDate; }
-    public void setRegistDate(LocalDateTime registDate) { this.registDate = registDate; }
-
-    public String getRegistASession() { return registASession; }
-    public void setRegistASession(String registASession) { this.registASession = registASession; }
+    //Lombok 自動產生 getter 和 setter 方法
     
-    public String getReserveBook() { return reserveBook; }
-    public void setReserveBook(String reserveBook) { this.reserveBook = reserveBook; }
-    
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
-    
-
-    public interface RegistRecordRepository extends JpaRepository<Register, Long> {
+    public interface RegistRecordRepository extends JpaRepository<Register, Integer> {
     
     
     }

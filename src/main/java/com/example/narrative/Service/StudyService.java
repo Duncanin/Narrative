@@ -16,14 +16,13 @@ public class StudyService {
     @Autowired
     private StudyRepository studyRepository;
 
-    public void saveStudyRecord(String name, LocalDate date, String location, LocalDate deadline, int quota, boolean isFull) {
+    public void saveStudyRecord(String name, LocalDate date, String location, LocalDate deadline, int quota) {
         Studies study = new Studies();
         study.setName(name);
         study.setDate(date);
         study.setLocation(location);
         study.setDeadline(deadline);
         study.setQuota(quota);
-        study.setFull(isFull);
         studyRepository.save(study);
     }
 
@@ -46,23 +45,27 @@ public class StudyService {
     public List<Studies> findAll() {
         return studyRepository.findAll();
     }
+
     public List<Studies> findAllWithRemainingQuota() {
         List<Studies> studies = studyRepository.findAll();
-        LocalDate currentDate = LocalDate.now();
         for (Studies study : studies) {
+            study.setExpired(study.getDeadline() != null && LocalDate.now().isAfter(study.getDeadline())); // 判斷是否過期
             int remainingQuota = study.getQuota() - study.getRegistrations().size();
             study.setRemainingQuota(remainingQuota);
-            study.setFull(remainingQuota <= 0); // <= 0 則為滿額
-            if (study.getDeadline() != null && currentDate.isAfter(study.getDeadline())) {
-                study.setExpired(true);
-            } else {
-                study.setExpired(false);
-            }
         }
         return studies;
     }
+
     public Studies findById(int id) {
         return studyRepository.findById(id).orElse(null);
+    }
+
+    //程式邏輯運算剩餘名額
+    public List<Studies> findAllNotFull() {
+        List<Studies> all = studyRepository.findAll();
+        return all.stream()
+                .filter(study -> study.getRegistrations().size() < study.getQuota())
+                .toList();
     }
 
 }

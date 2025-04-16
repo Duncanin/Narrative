@@ -6,14 +6,8 @@
 </head>
 <body>
     <!-- 上方導覽列 -->
-    <nav>
-        <ul style="list-style: none; display: flex; justify-content: center; gap: 20px;">
-            <li><a th:href="@{/admin/main}">🏠 首頁管理</a></li>
-            <li><a th:href="@{/admin/studies/page}">📘 讀書會列表</a></li>
-            <li><a th:href="@{/admin/registrations/page}">📚 報名者資訊</a></li>
-            <li><a th:href="@{/admin/other}">🛠 其他</a></li>
-        </ul>
-    </nav>
+    <div th:replace="~{fragments/nav :: adminNav(false)}"></div>
+    
     <h2>報名者聯絡資訊</h2>
     <table border="1">
         <tr>
@@ -22,9 +16,6 @@
             <th>電子郵件</th>
             <th>電話</th>
             <th>學校/單位</th>
-            <th>卡片自備與否</th>
-            <th>報名場次</th>
-            <th>預購書籍</th>
             <th>報名時間</th>
             <th>編輯</th>
         </tr>
@@ -34,14 +25,9 @@
             <td th:text="${record.mailAddress}"></td>
             <td th:text="${record.phoneNum}"></td>
             <td th:text="${record.schoolApart}"></td>
-            <td th:text="${record.carmediumHave}"></td>
-            <td th:text="${record.registASession}"></td>
-            <td th:text="${record.reserveBook}"></td>
-            <!-- <td th:text="${#dates.format(record.registDate, 'yyyy-MM-dd HH:mm:ss')}"></td> 0411 不可用，修正! -->
             <td th:text="${#temporals.format(record.registDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <!-- <td th:text="${record.registStatus}"></td> 無此類別 -->
             <td>
-                <a th:href="@{/admin/detail(id=${record.id})}">詳情</a><br
+                <a th:href="@{/admin/detail(id=${record.id})}">詳情</a><br>
             </td>
         </tr>
     </table>

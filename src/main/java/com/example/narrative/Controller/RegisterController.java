@@ -1,6 +1,8 @@
 // RegisterController.java 報名表單管理
 package com.example.narrative.Controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.narrative.Service.BookService;
+import com.example.narrative.Service.CardMediumService;
 import com.example.narrative.Service.RegisterService;
 import com.example.narrative.Service.StudyService;
 import com.example.narrative.model.RegistForm;
+import com.example.narrative.model.Register;
 import com.example.narrative.model.Studies;
 
 
@@ -21,10 +26,17 @@ public class RegisterController {
     @Autowired
     private final RegisterService registerService;
     private final StudyService studyService;
+    private final BookService bookService;
+    private final CardMediumService cardMediumService;
 
-    public RegisterController(RegisterService registerService, StudyService studyService) {
+    public RegisterController(RegisterService registerService,
+                                StudyService studyService,
+                                BookService bookService,
+                                CardMediumService cardMediumService ) {
         this.registerService = registerService;
         this.studyService = studyService;
+        this.bookService = bookService;
+        this.cardMediumService = cardMediumService;
     }
 
     //顯示報名表單
@@ -33,52 +45,37 @@ public class RegisterController {
         RegistForm registForm = new RegistForm();
 
         if (studyId != null) {
-        Studies study = studyService.findById(studyId);
-        registForm.setRegistASession(study.getName()); // 預選場次名稱
+            Studies study = studyService.findById(studyId);
+            registForm.setStudyId(study.getId()); // 預設讀書會 ID
     }
 
     model.addAttribute("registForm", registForm); // 表單物件
-    model.addAttribute("sessions", studyService.findAllWithRemainingQuota()); // 所有讀書會場次放進下拉式選單
+    model.addAttribute("sessions", studyService.findAllWithRemainingQuota()); // 讀書會場次
+    model.addAttribute("books", bookService.findAll()); //書籍表單
+    model.addAttribute("cardMediums", cardMediumService.findAll()); //卡片選擇
 
     return "regist/registForm";
     }
 
+    // 處理報名表單
     @PostMapping("/regist")
-    public String processRegistration(@ModelAttribute("regist/registForm") RegistForm registForm, Model model) {
-        try {
-            //基本驗證
-            if (registForm.getName() == null || registForm.getName().trim().isEmpty()) {
-                model.addAttribute("error", "請輸入報名者姓名");
-                return "regist/registForm";
-            }
-            if (registForm.getEmail() == null || registForm.getEmail().trim().isEmpty()) {
-                model.addAttribute("error", "請輸入聯絡信箱");
-                return "regist/registForm";
-            }
-            if (registForm.getPhone() == null || registForm.getPhone().trim().isEmpty()) {
-                model.addAttribute("error", "請輸入聯絡電話");
-                return "regist/registForm";
-            }
-            //處理預約邏輯(報名成功資訊)
-            // String message = String.format("已成功報名， 姓名 : %s， 聯絡信箱： %s， 聯絡電話： %s， 是否預約書籍： %s",
-            //     registForm.getName(), registForm.getEmail(), registForm.getPhone(), registForm.getReserveBook() ? "是" : "否");
-            String message = String.format(" %s 已成功報名>", registForm.getName());
-            model.addAttribute("message", message);
-            model.addAttribute("registForm", registForm);
+    public String processRegistration(@ModelAttribute RegistForm registForm, Model model) {
+        Register register = new Register();
+        
+        register.setRegisterName(registForm.getName());
+        register.setMailAddress(registForm.getEmail());
+        register.setPhoneNum(registForm.getPhone());
+        register.setRegistDate(LocalDateTime.now());
 
-            return "regist/confirmation";
+        // 設定關聯物件
+        register.setStudies(studyService.findById(registForm.getStudyId()));
+        register.setBook(bookService.findById(registForm.getBookId()));
+        register.setCarMedium(cardMediumService.findById(registForm.getCardMediumId()));
 
-        } catch (Exception e) {
-            model.addAttribute("error", "預約處理時發生錯誤：" + e.getMessage());
-            return "regist/registForm";
-        }
+        registerService.saveRegister(register);
+
+        model.addAttribute("message", registForm.getName() + " 報名成功！");
+        return "regist/confirmation";
     }
-
-    // 取得所有報名資料 0411 modify from getAllRegisters to findAllList
-    // 0414 worked repeat method, comment out
-    // @GetMapping("/admin/register/list")
-    // public ResponseEntity<List<Register>> findAllList() {
-    //     return ResponseEntity.ok(registerService.findAllList());
-    // }
 
 }

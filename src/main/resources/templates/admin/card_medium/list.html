@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>卡片媒材列表</title>
+</head>
+<body>
+    <!-- 上方導覽列 -->
+    <div th:replace="~{fragments/nav :: adminNav(false)}"></div>
+    <h2>卡片媒材列表</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>名稱</th>
+            <th>作者</th>
+            <th>價格</th>
+            <th>編輯</th>
+        </tr>
+        <tr th:each="cardMedium : ${cardMediums}">
+            <td th:text="${cardMedium.id}"></td>
+            <td th:text="${cardMedium.name}"></td>
+            <td th:text="${cardMedium.author}"></td>
+            <td th:text="${cardMedium.price}"></td>
+            <td>
+                <a th:href="@{/admin/cardMediums/edit(id=${cardMedium.id})}">編輯</a><br />
+                <a th:href="@{/admin/cardMediums/delete(id=${cardMedium.id})}" onclick="return confirm('確定要刪除這個媒材嗎？');">刪除</a><br />
+            </td>
+        </tr>
+</body>
+</html>

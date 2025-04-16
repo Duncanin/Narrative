@@ -27,11 +27,8 @@ class NarrativeApplicationTests {
 		record.setRegisterName(registerName);
 		record.setMailAddress(mailAddress);
 		record.setPhoneNum(phoneNum);
-		record.setCarmediumHave(carmediumHave);
 		record.setSchoolApart("無");
 		record.setRegistDate(java.time.LocalDateTime.now());
-		record.setRegistASession(registASession);
-		record.setReserveBook(reserveBook);
 		record.setUpdatedAt(java.time.LocalDateTime.now());
 
 		return record;

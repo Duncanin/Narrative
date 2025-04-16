@@ -13,7 +13,7 @@ import com.example.narrative.model.Register;
 import java.time.LocalDateTime;
 
 @Repository
-public interface RegistrationRepository extends JpaRepository<Register, Long> {
+public interface RegistrationRepository extends JpaRepository<Register, Integer> {
     List<Register> findByRegisterNameContaining(String registerName); // 這行是用來查詢註冊者名稱的
     List<Register> findByPhoneNumContaining(String phoneNum); // 這行是用來查詢註冊者電話號碼的
     List<Register> findByMailAddress(String mailAddress); // 這行是用來查詢註冊者的電子郵件地址
@@ -30,6 +30,8 @@ public interface RegistrationRepository extends JpaRepository<Register, Long> {
     // 修正命名錯誤
     Optional<Register> findByRegisterName(String registerName); // 這行是用來查詢註冊者名稱的
     //讓 Spring Boot 會自動幫你產生 SELECT * FROM narrative_registration_system WHERE register_name = ? 的 SQL 查詢
+
+    List<Register> findByStudies_Id(Integer studyId); // 這行是用來查詢特定讀書會的報名者
 
 
 }

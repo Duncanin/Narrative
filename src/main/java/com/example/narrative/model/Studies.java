@@ -4,8 +4,6 @@ package com.example.narrative.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import jakarta.persistence.CascadeType;
@@ -20,7 +18,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "studies", catalog = "narrative_management") // 資料表名稱
+@Table(name = "studies", // 資料表名稱
+        catalog = "narrative_management") // 資料庫名稱
 public class Studies {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -37,7 +36,8 @@ public class Studies {
     private LocalDate deadline;
     @Column(name = "quota")
     private int quota;
-    @Column(name = "is_full")
+
+    @Transient
     private boolean isFull;
 
     @OneToMany(mappedBy = "studies", cascade = CascadeType.ALL)
@@ -45,9 +45,6 @@ public class Studies {
 
     @Transient
     private int remainingQuota;
-
-    @Transient
-    private Map<String, String> extraFields; // JSON 格式儲存欄位配置
 
     @Transient
     private boolean expired;
@@ -73,6 +70,18 @@ public class Studies {
     public boolean isFull() {
         return this.quota >0 && this.registrations != null && this.registrations.size() >= this.quota;
     }
+    public void setFull(boolean isFull) {
+        this.isFull = isFull;
+    }
+
+    public int getRemainingQuota() {
+        return quota - registrations.size();
+    }
+
+    public void setRemainingQuota(int remainingQuota) {
+        this.remainingQuota = remainingQuota;
+    }
+    
     public boolean isExpired() {
         return deadline != null && LocalDate.now().isAfter(deadline);
     }
