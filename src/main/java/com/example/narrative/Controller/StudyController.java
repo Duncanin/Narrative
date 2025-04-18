@@ -1,5 +1,5 @@
 // StydyControaller.java 讀書會列表、讀書會資訊管理
-package com.example.narrative.Controller;
+package com.example.narrative.controller;
 
 import java.util.List;
 
@@ -7,8 +7,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.narrative.Service.StudyService;
-import com.example.narrative.model.Studies;
+import com.example.narrative.service.StudyService;
+import com.example.narrative.entity.Studies;
+import com.example.narrative.entity.RegistRecord;
+import com.example.narrative.service.RegistRecordService;
+import com.example.narrative.entity.Book;
+import com.example.narrative.service.BookService;
+import com.example.narrative.entity.CardMedium;
+import com.example.narrative.service.CardMediumService;
+import com.example.narrative.entity.Studies;
+import com.example.narrative.service.StudyService;
+import com.example.narrative.entity.RegistRecord;
+
 
 @Controller
 public class StudyController {

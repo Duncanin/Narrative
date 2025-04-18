@@ -1,4 +1,4 @@
-package com.example.narrative.Controller;
+package com.example.narrative.controller;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.narrative.Service.CardMediumService;
-import com.example.narrative.model.CardMedium;
+import com.example.narrative.entity.CardMedium;
+import com.example.narrative.service.CardMediumService;
 
 @Controller
 @RequestMapping("/admin/cardMediums")

@@ -42,16 +42,32 @@
                     <input type="text" id="phone_number" name="phone_number" th:field="*{phone}" required> <br/>
                 </div>
                 <div>
-                    <label> 是否購書 : </label>
-                    <select th:field="*{bookId}">
-                        <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.name}"></option>
-                    </select>
+                    <label for="school_apart"> 學校/單位 : </label>
+                    <input type="text" id="school_apart" name="school_apart" th:field="*{schoolApart}" nullable="true"> <br/>
                 </div>
                 <div>
-                    <label> 卡片選擇 : </label>
-                    <select th:field="*{cardMediumId}">
-                        <option th:each="cm : ${carmediums}" th:value="${cm.id}" th:text="${cm.type}"></option>
-                    </select>
+                    <label> 是否購書 (可複選): </label><br/>
+                    <div class="option-group-inline">
+                        <div th:each="book : ${books}" class="option-item-inline">
+                            <input type="checkbox" th:field="*{bookId}" th:value="${book.id}" />
+                            <label th:text="${book.name}"></label>
+                        </div>
+                    </div>
+                    <!-- <select th:field="*{bookId}">
+                        <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.name}"></option>
+                    </select> -->
+                </div>
+                <div>
+                    <label> 卡片選擇 (必選): </label>
+                    <div class="option-group-inline">
+                        <div th:each="cm : ${cardMediums}" class="option-item-inline">
+                            <input type="radio" th:field="*{cardMediumId}" th:value="${cm.id}" required />
+                            <label th:text="${cm.name}"></label>
+                        </div>
+                    </div>
+                    <!-- <select th:field="*{cardMediumId}">
+                        <option th:each="cardMediums : ${cardMediums}" th:value="${cardMediums.id}" th:text="${cardMediums.name}"></option>
+                    </select> -->
                 </div>
                 <button type="submit"> 報名 </button>
             </form>

@@ -1,5 +1,5 @@
 // HomeController.java 管理首頁
-package com.example.narrative.Controller;
+package com.example.narrative.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

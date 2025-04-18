@@ -1,11 +1,11 @@
-package com.example.narrative.Service;
+package com.example.narrative.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.narrative.Repository.CardMediumRepository;
-import com.example.narrative.model.CardMedium;
+import com.example.narrative.entity.CardMedium;
+import com.example.narrative.repository.CardMediumRepository;
 
 @Service
 public class CardMediumService {

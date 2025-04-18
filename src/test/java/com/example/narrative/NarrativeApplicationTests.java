@@ -5,25 +5,23 @@ import java.util.List;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.example.narrative.Repository.RegistrationRepository;
-import com.example.narrative.model.Register;
-
+import com.example.narrative.entity.RegistRecord;
+import com.example.narrative.repository.RegistrationRepository;
 import jakarta.transaction.Transactional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringBootTest
 class NarrativeApplicationTests {
 	@Autowired
-	private RegistrationRepository RegistrationRepository;
+	private RegistrationRepository registrationRepository;
 
 	@Test
 	void contextLoads() {
 	}
 
-	public Register createTest(String registerName, String mailAddress, String phoneNum, boolean carmediumHave, String registASession, String reserveBook) {
-		Register record = new Register();
+	public RegistRecord createTest(String registerName, String mailAddress, String phoneNum, boolean carmediumHave, String registASession, String reserveBook) {
+		RegistRecord record = new RegistRecord();
 		record.setRegisterName(registerName);
 		record.setMailAddress(mailAddress);
 		record.setPhoneNum(phoneNum);
@@ -38,19 +36,19 @@ class NarrativeApplicationTests {
 	@Rollback
 	@Test
 	public void testShowAllRegister() {
-		Register register1 = createTest("Amy", "Amy@gmail.com", "0911223456", true, "A場次", "A書");
-		RegistrationRepository.save(register1);
+		RegistRecord registRecord1 = createTest("Amy", "Amy@gmail.com", "0911223456", true, "A場次", "A書");
+		registrationRepository.save(registRecord1);
 
-		Register register2 = createTest("Ben", "Ben@yahoo.com.tw", "0998765321", false, "B場次", "B書");
-		RegistrationRepository.save(register2);
+		RegistRecord registRecord2 = createTest("Ben", "Ben@yahoo.com.tw", "0998765321", false, "B場次", "B書");
+		registrationRepository.save(registRecord2);
 
-		RegistrationRepository.flush(); // ← 強制 flush，有助於避免 Hibernate 延遲寫入導致的錯誤
+		registrationRepository.flush(); // ← 強制 flush，有助於避免 Hibernate 延遲寫入導致的錯誤
 
-		// Spring 嘗試去找一個 allId 的欄位，但 Register 顯然沒有這個欄位，所以它就報錯了。
-		// List<Register> allRegisters = RegistrationRepository.findByAllId();
-		List<Register> allRegisters = RegistrationRepository.findAll();
+		// Spring 嘗試去找一個 allId 的欄位，但 RegistRecord 顯然沒有這個欄位，所以它就報錯了。
+		// List<RegistRecord> allRegistRecords = RegistrationRepository.findByAllId();
+		List<RegistRecord> allRegistRecords = registrationRepository.findAll();
 
-		List<String> names = allRegisters.stream().map(Register::getRegisterName).toList();
+		List<String> names = allRegistRecords.stream().map(RegistRecord::getRegisterName).toList();
     	assertTrue(names.contains("Amy"));
     	assertTrue(names.contains("Ben"));
 	}

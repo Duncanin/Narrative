@@ -2,9 +2,11 @@ package com.example.narrative;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 
-@SpringBootApplication
+@SpringBootApplication (scanBasePackages="com.example.narrative")
+@EntityScan(basePackages = "com.example.narrative.entity")
 public class NarrativeApplication {
 
 	// @Value("${Narrative}")

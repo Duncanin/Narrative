@@ -1,5 +1,5 @@
 // File: Studies.java
-package com.example.narrative.model;
+package com.example.narrative.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ public class Studies {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
     @Column(name = "name")
     private String name;
     @Column(name = "date")
@@ -36,12 +35,19 @@ public class Studies {
     private LocalDate deadline;
     @Column(name = "quota")
     private int quota;
+    @Column(name = "fee")
+    private int fee;
+
+    //mappedBy對應的是 StudyFormField 裡的 private Studies studies;
+    // cascade,orphanRemoval?
+    @OneToMany (mappedBy = "studies", cascade= CascadeType.ALL, orphanRemoval=true)
+    private List<StudyFormField> formFields;
 
     @Transient
     private boolean isFull;
 
     @OneToMany(mappedBy = "studies", cascade = CascadeType.ALL)
-    private List<Register> registrations = new ArrayList<>();
+    private List<RegistRecord> registrations = new ArrayList<>();
 
     @Transient
     private int remainingQuota;

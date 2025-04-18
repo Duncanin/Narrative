@@ -1,4 +1,4 @@
-package com.example.narrative.model;
+package com.example.narrative.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,11 +1,12 @@
 // StudyRepository.java
-package com.example.narrative.Repository;
+package com.example.narrative.repository;
 
 import org.springframework.stereotype.Repository;
+
+import com.example.narrative.entity.Studies;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import com.example.narrative.model.Studies;
 
 import java.time.LocalDate;
 import java.util.List;

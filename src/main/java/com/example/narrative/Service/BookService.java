@@ -1,11 +1,11 @@
-package com.example.narrative.Service;
+// File: BookService.java
+package com.example.narrative.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
-import com.example.narrative.Repository.BookRepository;
-import com.example.narrative.model.Book;
+import com.example.narrative.entity.Book;
+import com.example.narrative.repository.BookRepository;
 
 @Service
 public class BookService {

@@ -14,12 +14,18 @@
             <th>姓名</th>
             <th>信箱</th>
             <th>電話</th>
+            <th>學校/單位</th>
+            <th>報名時間</th>
         </tr>
-        <tr th:each="register : ${registrations}">
-            <td th:text="${register.id}"></td>
-            <td th:text="${register.registerName}"></td>
-            <td th:text="${register.mailAddress}"></td>
-            <td th:text="${register.phoneNum}"></td>
+        <tr th:each="registRecord : ${registrations}">
+            <td th:text="${registRecord.id}"></td>
+            <td th:text="${registRecord.registerName}"></td>
+            <td th:text="${registRecord.mailAddress}"></td>
+            <td th:text="${registRecord.phoneNum}"></td>
+            <td th:text="${registRecord.schoolApart}"></td>
+            <td th:text="${#temporals.format(registRecord.registDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <a th:href="@{/admin/detail(id=${registRecord.id})}">詳情</a><br>
         </tr>
     </table>
 </body>

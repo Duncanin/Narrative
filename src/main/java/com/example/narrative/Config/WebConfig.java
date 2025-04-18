@@ -1,4 +1,4 @@
-package com.example.narrative.Config;
+package com.example.narrative.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

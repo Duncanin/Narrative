@@ -1,4 +1,4 @@
-image: maven:3.8.6-eclipse-temurin-17
+image: maven:3.8.6-eclipse-temurin-17-jdk
 
 services:
   - name: mysql:5.7

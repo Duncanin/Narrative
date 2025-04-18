@@ -1,5 +1,5 @@
 // File: StudyFormFieldService.java
-package com.example.narrative.Service;
+package com.example.narrative.service;
 
 import java.util.List;
 import java.util.Map;
@@ -7,9 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.narrative.Repository.StudyFormFieldRepository;
-import com.example.narrative.model.Studies;
-import com.example.narrative.model.StudyFormField;
+import com.example.narrative.entity.Studies;
+import com.example.narrative.entity.StudyFormField;
+import com.example.narrative.repository.StudyFormFieldRepository;
 
 @Service
 public class StudyFormFieldService {

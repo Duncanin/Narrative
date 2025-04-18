@@ -118,18 +118,50 @@ body {
     color: #333; /* 文字顏色 */
 }
 
-/* no function */
 table {
-    margin: 10px auto;
-    width: 90%;
-    border-collapse: collapse;
-    letter-spacing: 1px;
-    table-layout: fixed;
+    margin: 10px auto;              /* 表格上下邊距 10px，左右自動置中 */
+    width: 90%;                     /* 表格寬度為容器的 90% */
+    border-collapse: collapse;      /* 表格邊框合併，讓相鄰的邊框不重疊 */
+    letter-spacing: 1px;            /* 表格內文字的字母間距為 1px */
+    table-layout: fixed;            /* 表格欄寬固定，所有欄位平均分配寬度（不依內容調整） */
 }
 
-/* no function */
 th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #000000;
+    padding: 10px;                  /* 儲存格內部留白 10px，讓內容不會貼邊 */
+    text-align: center;            /* 文字置中 */
+    border: 1px solid #000000;     /* 黑色實線邊框，1px 寬 */
 }
+
+/* 橫向排列的選項群組 */
+.option-group-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+/* 單一 checkbox 或 radio 的容器，讓 input 和 label 對齊 */
+.option-item-inline {
+    display: flex;
+    align-items: center;
+}
+
+/* label 與 input 的間距 */
+.option-item-inline label {
+    margin-left: 5px;
+}
+
+/* 讀書會資訊列表 */
+.study-table {
+    border: 2px solid #666;
+    background-color: #ffeecf;
+}
+
+.study-table th {
+    background-color: #ffddaa;
+}
+
+.study-table td {
+    background-color: #ffe8d7;
+}
+

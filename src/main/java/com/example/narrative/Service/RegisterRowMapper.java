@@ -1,27 +1,27 @@
-package com.example.narrative.Service;
+package com.example.narrative.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.example.narrative.model.Register;
+import com.example.narrative.entity.RegistRecord;
 
-public class RegisterRowMapper implements RowMapper<Register>{
+public class RegisterRowMapper implements RowMapper<RegistRecord>{
 
     @Override
-    public Register mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Register register = new Register();
-        register.setId(rs.getInt("id"));
-        register.setRegisterName(rs.getString("register_name"));
-        register.setMailAddress(rs.getString("mail_address"));
-        register.setPhoneNum(rs.getString("phone_num"));
-        register.setSchoolApart(rs.getString("school_apart"));
-        register.setRegistDate(rs.getTimestamp("regist_date").toLocalDateTime());
-        register.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+    public RegistRecord mapRow(ResultSet rs, int rowNum) throws SQLException {
+        RegistRecord registRecord = new RegistRecord();
+        registRecord.setId(rs.getInt("id"));
+        registRecord.setRegisterName(rs.getString("register_name"));
+        registRecord.setMailAddress(rs.getString("mail_address"));
+        registRecord.setPhoneNum(rs.getString("phone_num"));
+        registRecord.setSchoolApart(rs.getString("school_apart"));
+        registRecord.setRegistDate(rs.getTimestamp("regist_date").toLocalDateTime());
+        registRecord.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
 
 
-        return register;
+        return registRecord;
     }
     
 

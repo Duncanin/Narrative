@@ -1,12 +1,13 @@
-package com.example.narrative.Controller;
+package com.example.narrative.controller;
 
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-import com.example.narrative.Service.BookService;
-import com.example.narrative.model.Book;
+
+import com.example.narrative.entity.Book;
+import com.example.narrative.service.BookService;
 
 
 @Controller
