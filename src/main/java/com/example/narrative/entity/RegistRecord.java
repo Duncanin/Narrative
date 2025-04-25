@@ -3,6 +3,7 @@ package com.example.narrative.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -70,6 +71,6 @@ public class RegistRecord {
 
         //Lombok 自動產生 getter 和 setter 方法
 
-        // !!error!! Entity不可放入Repository，會被Java認為是一個巢狀類別(Inner class) 導致整個類別無法正常解析getter/setter
+        // !!error!! Entity不可放入Repository資料夾，會被Java認為是一個巢狀類別(Inner class) 導致整個類別無法正常解析getter/setter
         // public interface RegistRecordRepository extends JpaRepository<RegistRecord, Integer> {}
 }

@@ -7,17 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.narrative.service.StudyService;
-import com.example.narrative.entity.Studies;
-import com.example.narrative.entity.RegistRecord;
-import com.example.narrative.service.RegistRecordService;
-import com.example.narrative.entity.Book;
-import com.example.narrative.service.BookService;
-import com.example.narrative.entity.CardMedium;
-import com.example.narrative.service.CardMediumService;
 import com.example.narrative.entity.Studies;
 import com.example.narrative.service.StudyService;
-import com.example.narrative.entity.RegistRecord;
 
 
 @Controller

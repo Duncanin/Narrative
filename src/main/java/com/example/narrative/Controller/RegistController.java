@@ -18,7 +18,6 @@ import com.example.narrative.service.CardMediumService;
 import com.example.narrative.service.RegistRecordService;
 import com.example.narrative.service.StudyService;
 import com.example.narrative.entity.Book;
-import com.example.narrative.entity.CardMedium;
 import com.example.narrative.entity.RegistRecord;
 import com.example.narrative.entity.Studies;
 
@@ -96,7 +95,7 @@ public class RegistController {
         registRecordService.saveRegister(registRecord);
 
         //傳遞資料到確認頁
-        model.addAttribute("registFor", registForm);
+        model.addAttribute("registForm", registForm);
         model.addAttribute("study", study);
         model.addAttribute("card", registRecord.getCarMedium());
         model.addAttribute("message", registForm.getName() + " 報名成功！");
