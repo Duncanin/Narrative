@@ -9,7 +9,9 @@
     <!-- 上方導覽列 -->
     <div th:replace="fragments/nav :: adminNav(false)"></div>
     
+
     <h2>讀書會列表</h2>
+    <a href="@{/admin/studies/create}">新建讀書會</a>
     <table border="1" style="width: 90%; margin: 0 auto; text-align: center;">
         <thead>
             <tr>

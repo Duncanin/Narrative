@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>建立讀書會</h1>
+    <form action="/admin/study/create" method="post">
+        <label for="name">讀書會名稱：</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="date">讀書會時間：</label>
+        <input type="datetime-local" id="date" name="date" required><br><br>
+
+        <label for="location">讀書會地點：</label>
+        <input type="text" id="location" name="location" required><br><br>
+
+        <label for="deadline">報名截止時間：</label>
+        <input type="datetime-local" id="deadline" name="deadline" required><br><br>
+
+        <label for="quota">名額：</label>
+        <input type="number" id="quota" name="quota" required><br><br>
+
+        <button type="submit">建立讀書會</button>
+    </form>
+    
+</body>
+</html>
