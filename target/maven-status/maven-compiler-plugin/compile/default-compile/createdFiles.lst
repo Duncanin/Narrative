@@ -18,14 +18,12 @@ com/example/narrative/entity/CardMedium.class
 com/example/narrative/entity/Studies.class
 com/example/narrative/entity/Book.class
 com/example/narrative/controller/AdminCardMediumController.class
-com/example/narrative/controller/StudyFormFieldController.class
 com/example/narrative/controller/AdminRegisterController.class
 com/example/narrative/service/RegisterRowMapper.class
 com/example/narrative/repository/CardMediumRepository.class
 com/example/narrative/model/RegistForm.class
 com/example/narrative/NarrativeApplication.class
 com/example/narrative/entity/RegistRecord.class
-com/example/narrative/controller/StudyFormFieldController$CustomField.class
 com/example/narrative/controller/AdminStudyController.class
 com/example/narrative/interceptor/AdminInterceptor.class
 com/example/narrative/controller/RegistController.class
