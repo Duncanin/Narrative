@@ -1,11 +1,11 @@
-# 使用 OpenJDK 作為基礎映像
-FROM eclipse-temurin:21-jdk
-
-# 建立應用資料夾
+# 第一階段：使用 Maven 打包
+FROM maven:3.8.5-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# 複製打包後的 jar 檔進容器
-COPY target/narrative-0.0.1-SNAPSHOT.jar app.jar
-
-# 啟動 Spring Boot 應用
+# 第二階段：使用 JAR 啟動
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
