@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讀書會詳情</title>
+</head>
+
+<body>
+    <!-- 上方導覽列 -->
+    <div th:replace="~{fragments/nav :: adminNav(false)}"></div>
+    <h1>讀書會詳情</h1>
+    <form action="/admin/studies/detail" method="post">
+        <ul>
+            <li>名稱：<span th:text="${study.name}"></span></li>
+            <li>時間：<span th:text="${#temporals.format(study.date, 'yyyy-MM-dd HH:mm')}"></span></li>
+            <li>地點：<span th:text="${study.location}"></span></li>
+            <li>截止日期：<span th:text="${#temporals.format(study.deadline, 'yyyy-MM-dd HH:mm')}"></span></li>
+            <li>名額：<span th:text="${study.quota}"></span></li>
+        </ul>
+
+        <a th:href="@{/admin/studies/detail/{id}/edit(id=${study.id})}">編輯  </a>
+
+        <form th:action="@{/admin/studies/detail/delete/{id}(id=${study.id})}" method="get"
+            onsubmit="return confirm('確定刪除？');">
+            <button type="submit"> 刪 除 </button>
+        </form>
+        <a th:href="@{/admin/studies/page}">返回列表</a>
+</body>
+</html>

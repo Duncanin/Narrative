@@ -6,72 +6,69 @@
 
 <body>
     <div layout:fragment="content">
-            <div th:if="${error}" class="error-message">
-                <p th:text="${error}" style="color:red"></p>
-            </div>
-            <h1>Welcome</h1>
-            <p>Please compelet the form ~ </p>
-
-            <h2>報名資料</h2>
-            <form th:action="@{/regist}" th:object="${registForm}" method="post" th:with="title='報名表單'">
-                <h2 th:text="${title}">表單</h2>
-                <div>
-                    <label> 報名場次 : </label>
-                    <select name="studies.id" th:field="*{studyId}" required>
-                        <option value="" disabled selected>請選擇報名場次</option>
-                        <option th:each="studySession : ${sessions}"
-                                th:value="${studySession.id}"
-                                th:disabled="${studySession.full or studySession.expired}"
-                                th:text="${studySession.name + ' - ' + #temporals.format(studySession.date, 'yyyy-MM-dd') 
-                                    + ' @ ' + studySession.location
-                                    + (studySession.expired ? (studySession.full ? '（已截止，名額已滿）' : '（已截止）') 
-                                    : (studySession.full ? '（名額已滿）' : ''))}">
-                        </option>
-                    </select>
-                </div>
-                <div>
-                    <label for="register_name"> 姓名 : </label>
-                    <input type="text" id="register_name" name="register_name" th:field="*{name}" required> <br/>
-                </div>
-                <div>
-                    <label for="mail_address"> 聯絡信箱 : </label>
-                    <input type="text" id="mail_address" name="mail_address" th:field="*{Email}" required> <br/>
-                </div>
-                <div>
-                    <label for="phone_number"> 聯絡電話 : </label>
-                    <input type="text" id="phone_number" name="phone_number" th:field="*{phone}" required> <br/>
-                </div>
-                <div>
-                    <label for="school_apart"> 學校/單位 : </label>
-                    <input type="text" id="school_apart" name="school_apart" th:field="*{schoolApart}" nullable="true"> <br/>
-                </div>
-                <div>
-                    <label> 是否購書 (可複選): </label><br/>
-                    <div class="option-group-inline">
-                        <div th:each="book : ${books}" class="option-item-inline">
-                            <input type="checkbox" th:field="*{bookId}" th:value="${book.id}" />
-                            <label th:text="${book.name}"></label>
-                        </div>
-                    </div>
-                    <!-- <select th:field="*{bookId}">
-                        <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.name}"></option>
-                    </select> -->
-                </div>
-                <div>
-                    <label> 卡片選擇 (必選): </label>
-                    <div class="option-group-inline">
-                        <div th:each="cm : ${cardMediums}" class="option-item-inline">
-                            <input type="radio" th:field="*{cardMediumId}" th:value="${cm.id}" required />
-                            <label th:text="${cm.name}"></label>
-                        </div>
-                    </div>
-                    <!-- <select th:field="*{cardMediumId}">
-                        <option th:each="cardMediums : ${cardMediums}" th:value="${cardMediums.id}" th:text="${cardMediums.name}"></option>
-                    </select> -->
-                </div>
-                <button type="submit"> 報名 </button>
-            </form>
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}" style="color:red"></p>
         </div>
+        <h1>Welcome</h1>
+        <p>Please compelet the form ~ </p>
+
+        <h2>報名資料</h2>
+        <form th:action="@{/regist/preview}" th:object="${registForm}" method="post">
+            <h2 th:text="${title}">表單</h2>
+            <div>
+                <label> 報名場次 : </label>
+                <select name="studies.id" th:field="*{studyId}" required>
+                    <option value="" disabled selected>請選擇報名場次</option>
+                    <option th:each="studySession : ${sessions}"
+                            th:value="${studySession.id}"
+                            th:text="${studySession.name + ' - ' +
+                                    #temporals.format(studySession.date, 'yyyy-MM-dd')
+                                    + ' @ ' + studySession.location}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label for="register_name"> 姓名 : </label>
+                <input type="text" id="register_name" name="register_name" th:field="*{name}" required> <br/>
+            </div>
+            <div>
+                <label for="mail_address"> 聯絡信箱 : </label>
+                <input type="text" id="mail_address" name="mail_address" th:field="*{Email}" required> <br/>
+            </div>
+            <div>
+                <label for="phone_number"> 聯絡電話 : </label>
+                <input type="text" id="phone_number" name="phone_number" th:field="*{phone}" required> <br/>
+            </div>
+            <div>
+                <label for="school_apart"> 學校/單位 : </label>
+                <input type="text" id="school_apart" name="school_apart" th:field="*{schoolApart}" nullable="true"> <br/>
+            </div>
+            <div>
+                <label> 是否購書 (可複選): </label><br/>
+                <div class="option-group-inline">
+                    <div th:each="book : ${books}" class="option-item-inline">
+                        <input type="checkbox" th:field="*{bookId}" th:value="${book.id}" />
+                        <label th:text="${book.name}"></label>
+                    </div>
+                </div>
+                <!-- <select th:field="*{bookId}">
+                    <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.name}"></option>
+                </select> -->
+            </div>
+            <div>
+                <label> 卡片選擇 (必選): </label>
+                <div class="option-group-inline">
+                    <div th:each="cm : ${cardMediums}" class="option-item-inline">
+                        <input type="radio" th:field="*{cardMediumId}" th:value="${cm.id}" required />
+                        <label th:text="${cm.name}"></label>
+                    </div>
+                </div>
+                <!-- <select th:field="*{cardMediumId}">
+                    <option th:each="cardMediums : ${cardMediums}" th:value="${cardMediums.id}" th:text="${cardMediums.name}"></option>
+                </select> -->
+            </div>
+            <button type="submit"> 預覽 </button>
+        </form>
     </div>
 </body>
 </html>

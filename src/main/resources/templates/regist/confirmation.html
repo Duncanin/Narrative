@@ -1,5 +1,5 @@
 <!-- confirmation.html -->
-<!DOCTYPE html>
+<!DOCTYPE >
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -9,31 +9,55 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <!-- <div th:replace="fragments/header :: pageHeader"></div> -->
-    <div class="regist-confirmation">
-        <h1>報名成功！</h1>
-        <p th:text="${message}">以下是您的報名資料：</p>
+    
+    <div>
+        <h1>報名預覽</h1>
         
-        <div class="regist-confirmation">
-            <h2>報名資料</h2>
-            <p th:text="'姓名：' + ${registForm.name}"></p>
-            <p th:text="'聯絡信箱：' + ${registForm.email}"></p>
-            <p th:text="'聯絡電話：' + ${registForm.phone}"></p>
-            <p th:text="'學校/單位：' + ${registForm.schoolApart}"></p>
-            <p th:text="'報名時間：' + ${#temporals.format(registForm.registDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
-            <p th:text="'報名場次：' + ${study.title}"></p>
-            <p> 預購書本：</p>
+        <form th:action="@{/regist/confirm}" method="post">
+                <!-- 隱藏所有資料欄位 -->
+        <input type="hidden" name="name" th:value="${registForm.name}" />
+        <input type="hidden" name="email" th:value="${registForm.email}" />
+        <input type="hidden" name="phone" th:value="${registForm.phone}" />
+        <input type="hidden" name="schoolApart" th:value="${registForm.schoolApart}" />
+        <input type="hidden" name="studyId" th:value="${registForm.studyId}" />
+        <input type="hidden" name="cardMediumId" th:value="${registForm.cardMediumId}" />
+
+        <!-- 書本 (複選)，需多筆送出 -->
+        <input type="hidden" th:each="bookId : ${registForm.bookId}" name="bookId" th:value="${bookId}" />
+
+        <ol>
+            <li>名稱：<span th:text="${study.name}"></span></li>
+            <li>時間：<span th:text="${#temporals.format(study.date, 'yyyy-MM-dd HH:mm')}"></span></li>
+            <li>地點：<span th:text="${study.location}"></span></li>
+            <li>截止日期：<span th:text="${#temporals.format(study.deadline, 'yyyy-MM-dd HH:mm')}"></span></li>
+            <li>名額：<span th:text="${study.quota}"></span></li>
+            <li>姓名：<span th:text="${registForm.name}"></span></li>
+            <li>信箱：<span th:text="${registForm.email}"></span></li>
+            <li>電話：<span th:text="${registForm.phone}"></span></li>
+            <li>單位：<span th:text="${registForm.schoolApart}"></span></li>
+            <p>卡片：<span th:text="${card.name}"></span></p>
+            <p>
+                選購書籍：
                 <ul>
                     <li th:each="book : ${books}" th:text="${book.name}"></li>
                 </ul>
-            <p th:text="'選擇卡片：' + ${card.name}"></p>
-            <p th:text="'報名費用：' + ${study.fee} + ' 元'"></p>
             </p>
-            
-        </div>
-        <div class="action">
-            <a href="/regist">返回報名表單</a>
-            <a href="/">返回首頁</a>
-    </div>
+        </ol>
+
+        <button type="submit"> 確認報名</button>
+    </form>
+
+    <form th:action="@{/regist}" method="post">
+        <input type="hidden" name="name" th:value="${registForm.name}" />
+        <input type="hidden" name="email" th:value="${registForm.email}" />
+        <input type="hidden" name="phone" th:value="${registForm.phone}" />
+        <input type="hidden" name="schoolApart" th:value="${registForm.schoolApart}" />
+        <input type="hidden" name="studyId" th:value="${registForm.studyId}" />
+        <input type="hidden" name="cardMediumId" th:value="${registForm.cardMediumId}" />
+        <input type="hidden" th:each="bookId : ${registForm.bookId}" name="bookId" th:value="${bookId}" />
+        
+        <button type="submit">🔙 返回修改</button>
+    </form>
+    
 </body>
 </html>

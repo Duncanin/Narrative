@@ -10,16 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.narrative.entity.RegistRecord;
 import com.example.narrative.model.RegistForm;
 import com.example.narrative.service.BookService;
 import com.example.narrative.service.CardMediumService;
 import com.example.narrative.service.RegistRecordService;
 import com.example.narrative.service.StudyService;
-import com.example.narrative.entity.Book;
-import com.example.narrative.entity.RegistRecord;
-import com.example.narrative.entity.Studies;
 
 
 @Controller
@@ -41,65 +38,56 @@ public class RegistController {
         this.cardMediumService = cardMediumService;
     }
 
-    //顯示報名表單
-    @GetMapping ("/regist")
-    public String showRegistrationForm(@RequestParam(value = "studyId", required = false) Integer studyId, Model model) {
-        RegistForm registForm = new RegistForm();
-
-        if (studyId != null) {
-            Studies study = studyService.findById(studyId);
-            registForm.setStudyId(study.getId()); // 預設讀書會 ID
+    @GetMapping("/regist")
+    public String showForm(Model model) {
+        model.addAttribute("registForm", new RegistForm());
+        model.addAttribute("sessions", studyService.findAvailableSessions());
+        model.addAttribute("books", bookService.findAll());
+        model.addAttribute("cardMediums", cardMediumService.findAll());
+        return "regist/registForm";
     }
 
-    // 報名表單
-    model.addAttribute("registForm", registForm);
-    // 讀書會場次
-    model.addAttribute("sessions", studyService.findAllWithRemainingQuota());
-    // 書籍表單
-    model.addAttribute("books", bookService.findAll());
-    // 卡片選擇
-    model.addAttribute("cardMediums", cardMediumService.findAll());
-    return "regist/registForm";
+    @PostMapping("/regist") // ← 返回修改時進入
+    public String handleBackFromPreview(@ModelAttribute RegistForm form, Model model) {
+        model.addAttribute("registForm", form);
+        model.addAttribute("sessions", studyService.findAvailableSessions());
+        model.addAttribute("books", bookService.findAll());
+        model.addAttribute("cardMediums", cardMediumService.findAll());
+        return "regist/registForm";
     }
 
-    // 處理報名表單
-    @PostMapping("/regist")
-    public String processRegistration(@ModelAttribute RegistForm registForm, Model model) {
-        RegistRecord registRecord = new RegistRecord();
-        
-        registRecord.setRegisterName(registForm.getName());
-        registRecord.setMailAddress(registForm.getEmail());
-        registRecord.setPhoneNum(registForm.getPhone());
-        registRecord.setSchoolApart(registForm.getSchoolApart());
-        registRecord.setRegistDate(LocalDateTime.now());
-
-        // 設定關聯讀書會
-        Studies study = studyService.findById(registForm.getStudyId());
-        registRecord.setStudies(study);
-        if (registForm.getBookId() != null && !registForm.getBookId().isEmpty()) {
-            List<Book> selectedBooks = registForm.getBookId().stream()
-                .map(bookService::findById)
-                .filter(book -> book != null) // 過濾掉找不到的書籍
-                .toList();
-                // Java 16 以後可用 .toList()，舊版用 .collect(Collectors.toList())
-                model.addAttribute("books", selectedBooks);
-        } else {
-            model.addAttribute("books", List.of());
-        }
-
-        // 設定卡片媒材
-        // registRecord.setBook(selectedBooks); // 選擇 RegistRecord 裡的(List<Book>)
-        registRecord.setCarMedium(cardMediumService.findById(registForm.getCardMediumId()));
-
-        // 儲存資料
-        registRecordService.saveRegister(registRecord);
-
-        //傳遞資料到確認頁
-        model.addAttribute("registForm", registForm);
-        model.addAttribute("study", study);
-        model.addAttribute("card", registRecord.getCarMedium());
-        model.addAttribute("message", registForm.getName() + " 報名成功！");
-
+    @PostMapping("/regist/preview")
+    public String showPreview(@ModelAttribute RegistForm form, Model model) {
+        model.addAttribute("registForm", form);
+        model.addAttribute("study", studyService.findById(form.getStudyId()));
+        model.addAttribute("books", form.getBookId() != null
+            ? form.getBookId().stream().map(bookService::findById).toList()
+            : List.of());
+        model.addAttribute("card", cardMediumService.findById(form.getCardMediumId()));
         return "regist/confirmation";
     }
+
+    @PostMapping("/regist/confirm")
+    public String confirmRegistration(@ModelAttribute RegistForm form, Model model) {
+        RegistRecord record = new RegistRecord();
+        record.setRegisterName(form.getName());
+        record.setMailAddress(form.getEmail());
+        record.setPhoneNum(form.getPhone());
+        record.setSchoolApart(form.getSchoolApart());
+        record.setStudies(studyService.findById(form.getStudyId()));
+        record.setBook(form.getBookId().stream().map(bookService::findById).toList());
+        record.setCarMedium(cardMediumService.findById(form.getCardMediumId()));
+        record.setRegistDate(LocalDateTime.now());
+        registRecordService.saveRegister(record);
+
+        model.addAttribute("registForm", form);
+        model.addAttribute("study", record.getStudies());
+        model.addAttribute("books", record.getBook());
+        model.addAttribute("card", record.getCarMedium());
+        model.addAttribute("registRecord", record);
+        model.addAttribute("message", form.getName() + " 報名成功！");
+        return "regist/success";
+    }
+
+
 }

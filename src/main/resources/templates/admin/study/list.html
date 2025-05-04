@@ -7,7 +7,7 @@
 </head>
 <body>
     <!-- 上方導覽列 -->
-    <div th:replace="fragments/nav :: adminNav(false)"></div>
+    <div th:replace="~{fragments/nav :: adminNav(false)}"></div>
     
 
     <h2>讀書會列表</h2>
@@ -35,7 +35,7 @@
                 <td th:text="${study.quota}"></td>
                 <td th:text="${study.remainingQuota}"></td>
                 <td>
-                    <a th:href="@{/admin/study/edit(id=${study.id})}">讀書會詳情</a><br>
+                    <a th:href="@{/admin/studies/detail/{id}(id=${study.id})}">讀書會詳情</a><br>
                     <a th:href="@{/admin/studies/register/{id}(id=${study.id})}">報名者列表</a>
             </tr>
         </tbody>

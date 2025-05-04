@@ -19,6 +19,8 @@ import com.example.narrative.service.StudyService;
 import jakarta.servlet.http.HttpSession;
 
 
+
+
 @Controller
 @RequestMapping("/admin/studies")
 public class AdminStudyController {
@@ -33,7 +35,8 @@ public class AdminStudyController {
     
     @GetMapping("/page")
     public String showStudyPage(Model model) {
-        List<Studies> studies = studyService.findAllStudies();
+        // List<Studies> studies = studyService.findAllStudies();
+        List<Studies> studies = studyService.findAllByLatestFirst(); // 根據ID降冪排序查詢所有讀書會
         model.addAttribute("studieslist", studies); // 將報名資料添加到模型中
         return "admin/study/list"; // 返回報名者列表頁面
     }
@@ -57,16 +60,67 @@ public class AdminStudyController {
     @PostMapping("/create") //
     public String createStudy(@ModelAttribute Studies study, Model model, HttpSession session) {
         // 儲存到session
-        session.setAttribute("study", study);
+        session.setAttribute("study", study); //存入session
         return "redirect:/admin/studies/preview"; // 導向預覽
     }
 
     @GetMapping("/preview")
     public String previewStudy(HttpSession session, Model model) {
         Studies study = (Studies) session.getAttribute("study");
+        if (study == null) {
+            return "redirect:/admin/studies/create"; // 如果session中沒有study，則重定向到創建頁面
+        }
         model.addAttribute("study", study);
         return "admin/study/preview";
     }
+
+    @PostMapping("/confirm")
+    public String confirmStudy(HttpSession session) {
+        Studies study = (Studies) session.getAttribute("study");
+        studyService.save(study);
+        session.removeAttribute("study");
+        return "redirect:/admin/studies/page";
+    }
+
+    @GetMapping("/detail/{studyId}")
+    public String showDetailStudyPage(@PathVariable Integer studyId, Model model) {
+        Studies study = studyService.findById(studyId);
+        if (study != null) {
+            model.addAttribute("study", study);
+            return "admin/study/detail"; // 導向詳情頁面
+        }
+        return "redirect:/admin/studies/page"; // 如果找不到讀書會，則重定向到列表頁面
+    }
+
+    @PostMapping("detail/{studyId}/edit")
+    public String editStudy(@PathVariable Integer studyId, @ModelAttribute Studies study) {
+        Studies existingStudy = studyService.findById(studyId);
+        if (existingStudy != null) {
+            existingStudy.setName(study.getName());
+            existingStudy.setDate(study.getDate());
+            existingStudy.setLocation(study.getLocation());
+            existingStudy.setDeadline(study.getDeadline());
+            existingStudy.setQuota(study.getQuota());
+            existingStudy.setFee(study.getFee());
+            studyService.save(existingStudy);
+        }
+        return "redirect:/admin/studies/detail/" + studyId; // 編輯後重定向到詳情頁面
+    }
+
+    @GetMapping("detail/{studyId}/edit")
+    public String showEditForm(@PathVariable Integer studyId, Model model) {
+        Studies study = studyService.findById(studyId);
+        model.addAttribute("study", study);
+        return "admin/study/detail-edit"; // 導向編輯頁面
+    }
+    
+
+    @GetMapping("/detail/delete/{studyId}")
+    public String deleteStudy(@PathVariable Integer studyId) {
+        studyService.delete(studyId);
+        return "redirect:/admin/studies/page"; // 刪除後重定向到列表頁面
+    }
+
 
 
 }
