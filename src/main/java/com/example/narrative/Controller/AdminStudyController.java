@@ -67,9 +67,6 @@ public class AdminStudyController {
         model.addAttribute("study", study);
         return "admin/study/preview";
     }
-    
-
-
 
 
 }

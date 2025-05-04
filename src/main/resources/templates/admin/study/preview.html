@@ -8,8 +8,8 @@
 <body>
     <!-- 上方導覽列 -->
     <div th:replace="fragments/nav :: adminNav(false)"></div>
-    <h1>建立讀書會</h1>
-    <form action="/admin/studies/create" method="post">
+    <h1>讀書會預覽</h1>
+    <form action="/admin/study/preview" method="post">
         <label for="name">讀書會名稱：</label>
         <input type="text" id="name" name="name" required><br><br>
 
@@ -25,7 +25,8 @@
         <label for="quota">名額：</label>
         <input type="number" id="quota" name="quota" required><br><br>
 
-        <button type="submit"> 預覽</button>
+        <button type="submit">確認建立</button>
+        <button type="button" onclick="window.history.back();">返回</button>
     </form>
     
 </body>

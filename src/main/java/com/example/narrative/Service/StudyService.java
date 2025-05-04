@@ -1,7 +1,7 @@
 // StudyService.java
 package com.example.narrative.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class StudyService {
     @Autowired
     private StudyRepository studyRepository;
 
-    public void saveStudyRecord(String name, LocalDate date, String location, LocalDate deadline, int quota) {
+    public void saveStudyRecord(String name, LocalDateTime date, String location, LocalDateTime deadline, int quota) {
         Studies study = new Studies();
         study.setName(name);
         study.setDate(date);
@@ -49,7 +49,7 @@ public class StudyService {
     public List<Studies> findAllWithRemainingQuota() {
         List<Studies> studies = studyRepository.findAll();
         for (Studies study : studies) {
-            study.setExpired(study.getDeadline() != null && LocalDate.now().isAfter(study.getDeadline())); // 判斷是否過期
+            study.setExpired(study.getDeadline() != null && LocalDateTime.now().isAfter(study.getDeadline())); // 判斷是否過期
             int remainingQuota = study.getQuota() - study.getRegistrations().size();
             study.setRemainingQuota(remainingQuota);
         }

@@ -20,10 +20,10 @@
         <h2>可自訂欄位</h2>
         <div th:each="field, iStat : ${availableFields}">
             <input type="checkbox"
-                   th:id="'field-' + ${iStat.index}"
-                   name="fieldKeys"
-                   th:value="${field.key}"
-                   th:checked="${selectedFieldKeys.contains(field.key)}" />
+                    th:id="'field-' + ${iStat.index}"
+                    name="fieldKeys"
+                    th:value="${field.key}"
+                    th:checked="${selectedFieldKeys.contains(field.key)}" />
             <label th:for="'field-' + ${iStat.index}" th:text="${field.label}"></label><br>
         </div>
 

@@ -1,9 +1,10 @@
 // File: Studies.java
 package com.example.narrative.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import jakarta.persistence.CascadeType;
@@ -28,11 +29,11 @@ public class Studies {
     @Column(name = "name")
     private String name;
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
     @Column(name = "location")
     private String location;
     @Column(name = "deadline")
-    private LocalDate deadline;
+    private LocalDateTime deadline;
     @Column(name = "quota")
     private int quota;
     @Column(name = "fee")
@@ -67,8 +68,8 @@ public class Studies {
         // 你可以在這裡添加自定義查詢方法
         List<Studies> findByNameContaining(String name);
         List<Studies> findByLocationContaining(String location);
-        List<Studies> findByDate(LocalDate date);
-        List<Studies> findByDeadline(LocalDate deadline);
+        List<Studies> findByDate(LocalDateTime date);
+        List<Studies> findByDeadline(LocalDateTime deadline);
         List<Studies> findByQuota(int quota);
         List<Studies> findByIsFull(boolean isFull);
     }
@@ -89,7 +90,7 @@ public class Studies {
     }
     
     public boolean isExpired() {
-        return deadline != null && LocalDate.now().isAfter(deadline);
+        return deadline != null && LocalDateTime.now().isAfter(deadline);
     }
     
 }
