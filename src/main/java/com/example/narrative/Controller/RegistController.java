@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.narrative.entity.RegistRecord;
 import com.example.narrative.model.RegistForm;
@@ -38,9 +39,18 @@ public class RegistController {
         this.cardMediumService = cardMediumService;
     }
 
+    //報名表單
     @GetMapping("/regist")
-    public String showForm(Model model) {
-        model.addAttribute("registForm", new RegistForm());
+    public String showForm(@RequestParam(value = "studyId", required = false) Integer studyId,
+                            Model model) {
+
+        RegistForm registForm = new RegistForm();
+
+        if (studyId != null) {
+            registForm.setStudyId(studyId);
+        }
+
+        model.addAttribute("registForm", registForm);
         model.addAttribute("sessions", studyService.findAvailableSessions());
         model.addAttribute("books", bookService.findAll());
         model.addAttribute("cardMediums", cardMediumService.findAll());

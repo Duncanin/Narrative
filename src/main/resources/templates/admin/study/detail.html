@@ -21,10 +21,10 @@
 
         <a th:href="@{/admin/studies/detail/{id}/edit(id=${study.id})}">編輯  </a>
 
-        <form th:action="@{/admin/studies/detail/delete/{id}(id=${study.id})}" method="get"
-            onsubmit="return confirm('確定刪除？');">
-            <button type="submit"> 刪 除 </button>
-        </form>
+        <a th:href="@{/admin/studies/detail/delete/{id}(id=${study.id})}"
+            onclick="return confirm('確定要刪除嗎？');">刪除</a>
+
+        <br>
         <a th:href="@{/admin/studies/page}">返回列表</a>
 </body>
 </html>

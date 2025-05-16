@@ -8,128 +8,95 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    /* 字型是 Arial */
-
     color: rgb(0, 0, 0);
-    /* 文字顏色為黑色 */
-
-    /* text-align: center;  所有格式文字置中 0408移除 */
-    /* 文字置中 */
-
     font-size: px;
-    /* 文字大小 */
-
     letter-spacing: 6px;
     /* 文字間距 */
-
     text-shadow: 2px 2px 4px #af9e9ef5;
     /* 文字陰影 */
-
     text-transform: uppercase;
     /* 文字轉換為大寫 */
-    
     font-weight: bold;
-    /* 文字加粗 */
-
     line-height: 3;
-    /* 行高 */
-
-    /* margin-top: 2%; */
-    /* 上方間距 */
 }
-
-/* 標題加上背景顏色 *
-/* th {
-    background-color: #f4f4f4;
-} */
 .container {
-    display: flex; /* 使用 Flexbox 來排版 */
-    justify-content: space-between; /* 左右排開 */
-    max-width: 1200px; /* 可視情況加限制寬 */
-    padding: 20px; /* 這裡是容器的內邊距 */
-    margin: 0 auto; /* 置中容器 */
-
-    /* 0408與main-content重複 ，不要背景或 padding */
-    /* gap: 20px; 這裡是容器的間距 */
-    /* align-items: flex-start; 將內容置中 */
-    /* min-height: 500vh; 這裡是容器的最小高度 */
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    padding: 20px;
+    margin: 0 auto;
 }
 .main-content {
-    /* gap: 20px; 這裡是容器的間距 */
     flex: 3;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 2px 8px #999;
-    text-align: left; /* 置左 */
+    text-align: left;
 }
-/* display: flex;使用 Flexbox 來排版 0408 網頁格式會跑掉*/
-
 .sidebar h1 {
-    font-size: 24px; /* 標題字型大小 */
-    margin-bottom: 10px; /* 下方間距 */
-    text-align: center; /* 置中 */
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .sidebar ul{
     flex: 1;
-    /* width: 200px; 側邊欄的寬度 */
-    padding-left: 20px; /* 給一點左邊距看起來整齊 */
+    padding-left: 20px;
     border-radius: 10px;
     text-align: left;
 }
 
 .sidebar ul li {
     list-style: none; /* 去除預設的項目符號 */
-    margin-bottom: 10px; /* 下方間距 */
+    margin-bottom: 10px;
 
 }
 
 .site-header {
-    /* background-color: #fff5e1; */ /* 背景顏色 */
-    padding: 10px 0;  /* 上下內邊距 */
-    text-align: center;  /* 置中 */
+    padding: 10px 0;
+    text-align: center;
     box-shadow: 0px 2px 4px rgba(0,0,0,0.1);  /* 輕微陰影 */
-    margin-bottom: 20px;  /* 下方間距 */
+    margin-bottom: 20px;
 }
 
 .site-header h1 {
-    margin: 0;  /* 去除預設的 margin */
-    font-size: 36px;  /* 標題字型大小 */
+    margin: 0;
+    font-size: 36px;
     letter-spacing: 4px;  /* 字母間距 */
 }
 
 .site-header a {
-    text-decoration: none;  /* 去除底線 */
-    color: #f5ffd0;  /* 標題顏色 */
-    transition: color 0.3s;  /* 連結顏色變化過渡 */
+    text-decoration: none;
+    color: #f5ffd0;
+    transition: color 0.3s;
 }
 
 .site-header a:hover {
-    color: #2100b3;  /* 滑鼠懸停時的顏色 */
+    color: #2100b3;
 }
 
 .site-footer {
-    text-align: center; /* 置左 */
+    text-align: center;
     margin-top: 1000px;
-    padding: 50px; /* 上下內邊距 */
+    padding: 50px;
     background-color: rgba(255, 255, 255, 0.5);
-    font-size: 14px; /* 字型大小 */
-    color: #333; /* 文字顏色 */
+    font-size: 14px;
+    color: #333;
 }
 
 table {
-    margin: 10px auto;              /* 表格上下邊距 10px，左右自動置中 */
-    width: 90%;                     /* 表格寬度為容器的 90% */
-    border-collapse: collapse;      /* 表格邊框合併，讓相鄰的邊框不重疊 */
-    letter-spacing: 1px;            /* 表格內文字的字母間距為 1px */
-    table-layout: fixed;            /* 表格欄寬固定，所有欄位平均分配寬度（不依內容調整） */
+    margin: 10px auto;
+    width: 90%;
+    border-collapse: collapse; /* 表格邊框合併，讓相鄰的邊框不重疊 */
+    letter-spacing: 1px;       /* 表格內文字的字母間距為 1px */
+    table-layout: fixed;       /* 表格欄寬固定，所有欄位平均分配寬度（不依內容調整） */
 }
 
 th, td {
-    padding: 10px;                  /* 儲存格內部留白 10px，讓內容不會貼邊 */
-    text-align: center;            /* 文字置中 */
-    border: 1px solid #000000;     /* 黑色實線邊框，1px 寬 */
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000000;
 }
 
 /* 橫向排列的選項群組 */
@@ -139,18 +106,22 @@ th, td {
     gap: 10px;
     margin-top: 5px;
 }
-
 /* 單一 checkbox 或 radio 的容器，讓 input 和 label 對齊 */
 .option-item-inline {
     display: flex;
     align-items: center;
+    border-radius: 15px;
+    cursor: pointer;
 }
-
-/* label 與 input 的間距 */
-.option-item-inline label {
-    margin-left: 5px;
+.option-item-inline span {
+    padding-left: 7px;
 }
-
+.option-item-inline:hover {
+    background: rgba(255, 217, 0, 0.5);
+}
+.option-item-inline:has(:checked) {
+    background: rgba(255, 217, 0, 0.5);
+}
 /* 讀書會資訊列表 */
 .study-table {
     border: 2px solid #666;
@@ -165,3 +136,13 @@ th, td {
     background-color: #ffe8d7;
 }
 
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-content, .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

@@ -46,22 +46,19 @@
             <div>
                 <label> 是否購書 (可複選): </label><br/>
                 <div class="option-group-inline">
-                    <div th:each="book : ${books}" class="option-item-inline">
+                    <label th:each="book : ${books}" class="option-item-inline">
                         <input type="checkbox" th:field="*{bookId}" th:value="${book.id}" />
-                        <label th:text="${book.name}"></label>
-                    </div>
+                        <span th:text="${book.name}"></span>
+                    </label>
                 </div>
-                <!-- <select th:field="*{bookId}">
-                    <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.name}"></option>
-                </select> -->
             </div>
             <div>
                 <label> 卡片選擇 (必選): </label>
                 <div class="option-group-inline">
-                    <div th:each="cm : ${cardMediums}" class="option-item-inline">
+                    <label th:each="cm : ${cardMediums}" class="option-item-inline">
                         <input type="radio" th:field="*{cardMediumId}" th:value="${cm.id}" required />
-                        <label th:text="${cm.name}"></label>
-                    </div>
+                        <span th:text="${cm.name}"></span>
+                    </label>
                 </div>
                 <!-- <select th:field="*{cardMediumId}">
                     <option th:each="cardMediums : ${cardMediums}" th:value="${cardMediums.id}" th:text="${cardMediums.name}"></option>
