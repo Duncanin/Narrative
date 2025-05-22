@@ -34,6 +34,10 @@ body {
     box-shadow: 2px 2px 8px #999;
     text-align: left;
 }
+.main-content a {
+    text-decoration: none;
+    text-shadow: #666;
+}
 .sidebar h1 {
     font-size: 24px;
     margin-bottom: 10px;
@@ -47,10 +51,14 @@ body {
     text-align: left;
 }
 
-.sidebar ul li {
-    list-style: none; /* 去除預設的項目符號 */
+.sidebar ul li a{
+    text-decoration: none;
     margin-bottom: 10px;
-
+    color: #000000;
+    background: #d7e4f8;
+    text-shadow: #666;
+    border-radius: 10px;
+    padding: 3px 7px;
 }
 
 .site-header {

@@ -18,7 +18,9 @@
     <div class="container">
         <!-- 這裡會被 index.html 的 layout:fragment="content" 替換 -->
         <!-- 主內容在左邊 -->
-        <main class="main-content" layout:fragment="content">內容會被 layout 取代</main>
+        <main class="main-content" layout:fragment="content">
+            內容會被 layout 取代
+        </main>
         <!-- 側邊欄在右邊 -->
         <aside class="sidebar" th:replace="~{fragments/sidebar :: sidebar}"></aside>
     </div>
