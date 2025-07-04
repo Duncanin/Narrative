@@ -5,10 +5,10 @@
 ## 🔧 技術架構
 
 - 後端：Spring Boot、Spring MVC、Spring Data JPA
-- 前端：HTML5、CSS3、Bootstrap（學習中）
-- 資料庫：MySQL
+- 前端：HTML5、CSS
+- 資料庫：MySQL, hibernate, Spring Data JPA
 - 模板引擎：Thymeleaf
-- 開發工具：IntelliJ IDEA、Visual Studio Code
+- 開發工具：Visual Studio Code
 - 版本控制：Git / GitHub
 
 ## 💡 功能說明
